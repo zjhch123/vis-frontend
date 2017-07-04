@@ -1,0 +1,17 @@
+.g-index {
+  height: 100vh;
+  min-height: 600px;
+  background-image: url("../image/icsmap.png");
+  background-color: black;
+  background-size: 80% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  display: flex;
+  flex-direction: column;
+  .g-header, .g-footer {
+    flex: 0 0 48px;
+  }
+  .g-main {
+    flex: 1;
+  }
+}
