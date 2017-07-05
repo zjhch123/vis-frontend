@@ -7,15 +7,17 @@ export default class ResultHeader extends React.Component {
     return (
       <header className={style['header'] + ' ' + this.props.className}>
         <div className={style["g-left"]}>
-          <div className={style["m-logo"]}>
-            <div className={style["img"]}>
-              <img src={require('../image/logo.png')} alt="logo"/>
+          <Link to="/" style={{display: "block", height: "48px", outline: "none", backgroundImage: "url(about:blank)"}}>
+            <div className={style["m-logo"]}>
+              <div className={style["img"]}>
+                <img src={require('../image/logo.png')} alt="logo"/>
+              </div>
+              <div className={style["label"]}>
+                <p className={style["title"]}>鉴势</p>
+                <p className={style["subtitle"]}>工控设备搜索平台</p>
+              </div>
             </div>
-            <div className={style["label"]}>
-              <p className={style["title"]}>鉴势</p>
-              <p className={style["subtitle"]}>工控设备搜索平台</p>
-            </div>
-          </div>
+          </Link>
         </div>
         <div className={style["m-form"]}>
           <input type="text" placeholder="请输入查询条件"/><a href="javascript:;" className={style["search"]}>GO</a>

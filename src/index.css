@@ -5,3 +5,13 @@ body {
   min-width: 1090px;
   min-height: 600px;
 }
+:global(#root) {
+  display: flex;
+  flex-direction: column;
+}
+:global(.g-container) {
+  height: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}

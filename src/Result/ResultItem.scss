@@ -3,7 +3,8 @@
   src: url("../font/Inconsolata.woff");
 }
 .m-result-item {
-  width: 630px;
+  width: 960px;
+  margin-bottom: 16px;
   p {
     margin: 0;
   }
@@ -16,6 +17,8 @@
   }
   .m-left {
     float: left;
+    width: 250px;
+    overflow: hidden;
     .u-tag {
       margin: 5px 0;
       span+span {
@@ -30,7 +33,8 @@
     }
   }
   .m-right {
-    float: right;
+    float: left;
+    margin-left: 150px;
     .u-detail {
       color: #f7b224;
       font-family: Inconsolata;

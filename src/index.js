@@ -9,7 +9,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 var a = function() {
   var r = document.getElementById('root');
   var ch = document.documentElement.clientHeight;
-  r.style.height = ch + "px";
+  r.style.minHeight = ch + "px";
 }
 a();
 setInterval(a, 300);
