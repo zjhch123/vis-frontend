@@ -10,7 +10,7 @@ import Result from './Result/Result.js';
 // 这里是整个APP的路由的配置
 const App = () => (
   <Router>
-    <div>
+    <div style={{height: "100%"}}>
       <Route exact path="/" component={Index}/>
       <Route path="/result" component={Result}/>
     </div>

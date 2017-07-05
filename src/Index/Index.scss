@@ -1,4 +1,4 @@
-.g-index {
+.g_index {
   height: 100vh;
   min-height: 600px;
   background-image: url("../image/icsmap.png");
@@ -8,10 +8,10 @@
   background-position: center center;
   display: flex;
   flex-direction: column;
-  .g-header, .g-footer {
+  .g_header, .g_footer {
     flex: 0 0 48px;
   }
-  .g-main {
+  .g_main {
     flex: 1;
   }
 }

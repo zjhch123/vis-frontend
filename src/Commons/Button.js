@@ -1,11 +1,11 @@
 import React from 'react';
-import './Button.scss';
+import style from './Button.scss';
 
 class Button extends React.Component {
   render() {
     return (
-      <div className={"btn-father " + this.props.className}>
-        <a href="javascript:;" className={'btn ' + this.props.type} onClick={() => this.props.click && this.props.click()}>
+      <div className={style.btn_father + " " + this.props.className}>
+        <a href="javascript:;" className={style.btn + " " + style[this.props.type]} onClick={() => this.props.click && this.props.click()}>
           {this.props.title}
         </a>
       </div>

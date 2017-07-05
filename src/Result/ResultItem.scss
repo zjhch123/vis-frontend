@@ -1,0 +1,48 @@
+@font-face{
+  font-family: Inconsolata;
+  src: url("../font/Inconsolata.woff");
+}
+.m-result-item {
+  width: 630px;
+  p {
+    margin: 0;
+  }
+  .u-ip {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .m-left {
+    float: left;
+    .u-tag {
+      margin: 5px 0;
+      span+span {
+        margin-left: 5px;
+      }
+    }
+    .u-country, .u-org {
+      color: rgb(193, 189, 191);
+      font-size: 13px;
+      font-family: "sans-serif";
+      font-weight: bold;
+    }
+  }
+  .m-right {
+    float: right;
+    .u-detail {
+      color: #f7b224;
+      font-family: Inconsolata;
+      line-height: 25px;
+      margin-bottom: 20px;
+      word-wrap: break-word;
+      font-size: 13px;
+    }
+  }
+  &:after {
+    clear: both;
+    display: table;
+    content: "";
+  }
+}
