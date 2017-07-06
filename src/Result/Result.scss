@@ -3,14 +3,20 @@
   .m-result-footer {
     background-color: #1b1b1b;
   }
+  .m-split-1 {
+    box-sizing: border-box;
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
   .m-main {
     background-color: #1b1b1b;
+    min-height: calc(100vh - 177px);
     .defaultResult {
       color: white;
       text-align: center;
       box-sizing: border-box;
-      min-height: 504px;
-      height: calc(100vh - 96px);
+      min-height: 439px;
+      height: calc(100vh - 161px);
       background-color: #1b1b1b;
       padding-top: 100px;
       h1 {

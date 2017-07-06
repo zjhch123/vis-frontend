@@ -18,103 +18,17 @@
     text-decoration: none;
     display: inline-block;
     padding: 0 18px;
+    &.active {
+      background-color: #1a1a1a;  
+    }
   }
-  .g-right .link-item:hover {
+  .link-item:hover {
     background-color: #3a3a3a;
   }
   &:after {
     content: "";
     clear: both;
     display: table;
-  }
-  .m-logo {
-    height: 48px;
-    float: left;
-    &:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-    &:before {
-      content: '';
-      width: 1px;
-      height: 100%;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .img {
-      float: left;
-      margin-top: -6px;
-      width: 60px;
-      height: 60px;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .label {
-      display: inline-block;
-      vertical-align: middle;
-      color: white;
-      line-height: 1.2;
-      p {
-        margin: 0;
-      }
-      .title {
-        font-size: 16px;
-        position: relative;
-        &:after {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 1px;
-          content: "";
-          background-color: white;
-        }
-      }
-      .subtitle {
-        font-size: 12px;
-      }
-    }
-  }
-  .m-form {
-    text-align: right;
-    display: inline-flex;
-    height: 48px;
-    width: 30%;
-    align-items: center;
-    justify-content: center;
-    padding-left: 40px;
-    * {
-      box-sizing: border-box;
-    }
-    &:after {
-      height: 100%;
-      width: 1px;
-      content: "";
-      display: inline-block;
-      vertical-align: middle;
-    }
-    input {
-      display: inline-block;
-      padding-left: 10px;
-      font-size: 14px;
-      height: 30px;
-      vertical-align: middle;
-      flex: 1 1 0%;
-    }
-    .search {
-      flex: 0 0 40px;
-      display: inline-block;
-      vertical-align: middle;
-      width: 40px;
-      line-height: 30px;
-      text-align: center;
-      text-decoration: none;
-      color: white;
-      background-color: #3a3a3a;
-    }
   }
 }
 

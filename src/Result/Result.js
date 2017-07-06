@@ -5,7 +5,8 @@ import Footer from '../Commons/Footer.js';
 import SearchResult from './SearchResult.js';
 import Util from '../Util/Util.js';
 import createHistory from 'history/createBrowserHistory';
-
+import SearchBar from './SearchBar.js';
+import Split from '../Commons/Split.js';
 const history = createHistory()
 
 export default class Result extends React.Component {
@@ -25,12 +26,10 @@ export default class Result extends React.Component {
     val = val || ''
     page = page || 1
     pageSize = pageSize || 10
+    let condition = {q: val, page: page, pageSize: pageSize}
+    if(Util.objIsEquals(condition, this.state.condition)) {return}
     this.setState({
-      condition: {
-        q: val,
-        page: page || 1,
-        pageSize: pageSize || 10
-      }
+      condition: condition
     });
     const location = {
       filename: '/result',
@@ -56,7 +55,9 @@ export default class Result extends React.Component {
   render() {
     return (
       <div className={style["g-result"]}>
-        <ResultHeader className={style["m-result-header"]} onSearch={(val) => this.handlerSearch(val)}/>
+        <ResultHeader className={style["m-result-header"]}/>
+        <SearchBar title={Util.getUrlParam(this.props.location.search, 'q') || ''} onSearch={(val) => this.handlerSearch(val)} />
+        <Split className={style["m-split-1"]}/>
         <main className={style["m-main"]}>
           <SearchResult condition={this.state.condition}/>
         </main>

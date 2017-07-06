@@ -3,6 +3,6 @@ import style from './Split.scss';
 
 export default function Split(prop) {
   return (
-    <hr className={style.hr}/>
+    <hr className={style.hr + ' ' + prop.className}/>
   )
 }

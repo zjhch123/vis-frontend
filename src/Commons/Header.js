@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import style from './Header.scss';
 
 export default class Header extends React.Component {
@@ -11,11 +11,11 @@ export default class Header extends React.Component {
         </div>
         <div className={style["g-right"]}>
           <Link to="/" className={style["link-item"]}>首页</Link>
-          <Link to="/result" className={style["link-item"]}>势窗</Link>
-          <Link to="/" className={style["link-item"]}>势界</Link>
-          <Link to="/" className={style["link-item"]}>开放API</Link>
-          <Link to="/" className={style["link-item"]}>帮助</Link>
-          <Link to="/" className={style["link-item"]}>关于我们</Link>
+          <NavLink exact to="/result" className={style["link-item"]} activeClassName={style["active"]}>势窗</NavLink>
+          <NavLink exact to="/1" className={style["link-item"]} activeClassName={style["active"]}>势界</NavLink>
+          <NavLink exact to="/2" className={style["link-item"]} activeClassName={style["active"]}>开放API</NavLink>
+          <NavLink exact to="/3" className={style["link-item"]} activeClassName={style["active"]}>帮助</NavLink>
+          <NavLink exact to="/4" className={style["link-item"]} activeClassName={style["active"]}>关于我们</NavLink>
         </div>
       </header>
     )
