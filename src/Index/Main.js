@@ -2,7 +2,6 @@ import React from 'react';
 import style from './Main.scss';
 import {Redirect} from 'react-router-dom';
 import Button from '../Commons/Button.js';
-import $ from 'jquery';
 
 export default class Main extends React.Component {
 
@@ -61,7 +60,10 @@ export default class Main extends React.Component {
     const query = this.state.query
     if(query) {
       return (
-        <Redirect push to={'/result/' + query}/>
+        <Redirect push to={{
+          pathname: '/result',
+          search: 'q=' + query
+        }}/>
       )
     }
     return (

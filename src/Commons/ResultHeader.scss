@@ -80,11 +80,12 @@
   }
   .m-form {
     text-align: right;
-    display: inline-block;
+    display: inline-flex;
     height: 48px;
     width: 30%;
     align-items: center;
     justify-content: center;
+    padding-left: 40px;
     * {
       box-sizing: border-box;
     }
@@ -97,16 +98,17 @@
     }
     input {
       display: inline-block;
-      width: 80%;
       padding-left: 10px;
       font-size: 14px;
       height: 30px;
       vertical-align: middle;
+      flex: 1 1 0%;
     }
     .search {
+      flex: 0 0 40px;
       display: inline-block;
       vertical-align: middle;
-      width: 30px;
+      width: 40px;
       line-height: 30px;
       text-align: center;
       text-decoration: none;

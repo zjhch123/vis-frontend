@@ -3,6 +3,11 @@ import style from './ResultHeader.scss';
 import { Link } from 'react-router-dom';
 
 export default class ResultHeader extends React.Component {
+  handlerClick(cb) {
+    let value = this.refs["searchInput"].value
+    cb(value)
+  }
+
   render() {
     return (
       <header className={style['header'] + ' ' + this.props.className}>
@@ -20,7 +25,7 @@ export default class ResultHeader extends React.Component {
           </Link>
         </div>
         <div className={style["m-form"]}>
-          <input type="text" placeholder="请输入查询条件"/><a href="javascript:;" className={style["search"]}>GO</a>
+          <input type="text" placeholder="请输入查询条件" ref="searchInput"/><a href="javascript:;" className={style["search"]} onClick={() => {this.handlerClick(this.props.onSearch)}}>GO</a>
         </div>
         <div className={style["g-right"]}>
           <Link to="/" className={style["link-item"]}>首页</Link>

@@ -7,11 +7,11 @@ import style from './Index.scss';
 export default class Index extends React.Component {
   render() {
     return (
-      <div className={style.g_index}>
-        <Header className={style.g_header}/>
-        <Main className={style.g_main}/>
-        <Footer className={style.g_footer}/>
+      <div className={style["g-index"]}>
+        <Header className={style["g-header"]}/>
+        <Main className={style["g-main"]}/>
+        <Footer className={style["g-footer"]}/>
       </div>
     )
   }
-}
+} 

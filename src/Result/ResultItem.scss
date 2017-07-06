@@ -5,6 +5,14 @@
 .m-result-item {
   width: 960px;
   margin-bottom: 16px;
+  .u-content {
+    &:after {
+      clear: both;
+      display: table;
+      content: "";
+    }
+    margin-bottom: 20px;
+  }
   p {
     margin: 0;
   }
@@ -35,18 +43,15 @@
   .m-right {
     float: left;
     margin-left: 150px;
+    max-width: 450px;
+    max-height: 500px;
+    overflow: hidden;
     .u-detail {
       color: #f7b224;
       font-family: Inconsolata;
       line-height: 25px;
-      margin-bottom: 20px;
       word-wrap: break-word;
       font-size: 13px;
     }
-  }
-  &:after {
-    clear: both;
-    display: table;
-    content: "";
   }
 }
