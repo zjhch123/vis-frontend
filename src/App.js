@@ -6,7 +6,6 @@ import {
 import Index from './Index/Index.js';
 import Result from './Result/Result.js';
 
-
 // 这里是整个APP的路由的配置
 const App = () => (
   <Router>

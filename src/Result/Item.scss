@@ -1,0 +1,16 @@
+.g-container {
+  display: flex;
+  justify-content: space-between;
+  line-height: 25px;
+  .g-left {
+    font-size: 13px;
+    color: #00aaff;
+    font-family: sans-serif;
+    font-weight: bold;
+  }
+  .g-right {
+    font-size: 13px;
+    color: #C1BDBF;
+    text-align: right
+  }
+}

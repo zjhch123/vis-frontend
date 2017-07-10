@@ -17,7 +17,7 @@ export default class SearchBar extends React.Component {
     return (
       <div className={style["m-container"]}>
         <div className={style["m-logo"]}>
-          <img src={require('../image/logo.png')}/>
+          <img src={require('../image/logo.png')} alt="logo"/>
           <div className={style["label"]}>
             <p className={style["title"]}>鉴势</p>
             <p className={style["subtitle"]}>工控设备搜索平台</p>
@@ -31,6 +31,7 @@ export default class SearchBar extends React.Component {
           <a href="javascript:;" className={style["m-btn"]} ref="btn"  
                 onClick={() => {this.handlerClick(this.props.onSearch)}}>立即鉴势</a>
         </div>
+        <span className={style["u-tip"]}>数据最新获取时间：2017年07月06日</span>
       </div>
     )
   }
