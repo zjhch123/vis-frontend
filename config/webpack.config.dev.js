@@ -92,6 +92,7 @@ module.exports = {
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
+      'mapbox-gl$': path.join(paths.appNodeModules, '/mapbox-gl/dist/mapbox-gl.js')
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -145,6 +146,7 @@ module.exports = {
           /\.jpe?g$/,
           /\.png$/,
           /\.scss$/,
+          /\.csv$/,
         ],
         loader: require.resolve('file-loader'),
         options: {
@@ -155,7 +157,7 @@ module.exports = {
       // smaller than specified limit in bytes as data URLs to avoid requests.
       // A missing `test` is equivalent to a match.
       {
-        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/, /\.csv$/],
         loader: require.resolve('url-loader'),
         options: {
           limit: 10000,

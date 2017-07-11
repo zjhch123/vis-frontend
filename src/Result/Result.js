@@ -9,6 +9,7 @@ import SearchBar from './SearchBar.js';
 import Split from '../Commons/Split.js';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import Map from '../Map/Map.js';
 
 const history = createHistory()
 
@@ -126,6 +127,7 @@ export default class Result extends React.Component {
         <ResultHeader className={style["m-result-header"]}/>
         <SearchBar title={Util.getUrlParam(this.props.location.search, 'q') || ''} onSearch={(val) => this.handlerSearch(val)} />
         <Split className={style["m-split-1"]}/>
+        <Map />
         <main className={style["m-main"]}>
           <SearchResult condition={this.state.condition} 
                   isLoading={this.isLoading.bind(this)} 
