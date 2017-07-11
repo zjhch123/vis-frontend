@@ -147,6 +147,7 @@ module.exports = {
           /\.png$/,
           /\.scss$/,
           /\.csv$/,
+          /\.svg$/
         ],
         loader: require.resolve('file-loader'),
         options: {

@@ -20,10 +20,10 @@ const colorRange = [
   [209, 55, 78]
 ];
 
-const elevationScale = {min: 1, max: 50};
+const elevationScale = {min: 300, max: 500};
 
 const defaultProps = {
-  radius: 1000,
+  radius: 15000,
   upperPercentile: 100,
   coverage: 1
 };
@@ -36,13 +36,13 @@ export default class DeckGLOverlay extends Component {
 
   static get defaultViewport() {
     return {
-      longitude: -1.4157267858730052,
-      latitude: 52.232395363869415,
-      zoom: 6.6,
-      minZoom: 5,
+      longitude: 110,
+      latitude: 30,
+      zoom: 2,
+      minZoom: 1,
       maxZoom: 15,
       pitch: 40.5,
-      bearing: -27.396674584323023
+      bearing: 0
     };
   }
 

@@ -3,7 +3,7 @@ import React from 'react';
 import MapGL from 'react-map-gl';
 import DeckGLOverlay from './deckgl-overlay.js';
 
-import {csv as requestCsv} from 'd3-request';
+import {csv as requestCsv, request} from 'd3-request';
 
 // Set your mapbox token here
 const MAPBOX_TOKEN = "pk.eyJ1IjoiempoY2gxMjMiLCJhIjoiY2l1cDd4cWduMDAzMDJvbDhrY2Zta3NkNCJ9.3FmRDWqp0TXkgdDIWnM-vw"; // eslint-disable-line
@@ -21,12 +21,29 @@ export default class Map extends React.Component {
       data: null
     };
 
-    requestCsv(require('./data/heartmap-data.csv'), (error, response) => {
-      if (!error) {
-        const data = response.map(d => ([Number(d.lng), Number(d.lat)]));
-        this.setState({data});
-      }
-    });
+    // requestCsv(require('./data/heartmap-data.csv'), (error, response) => {
+    //   if (!error) {
+    //     const data = response.map(d => ([Number(d.lng), Number(d.lat)]));
+    //     console.log(data)
+    //     this.setState({data});
+    //   }
+    // });
+    request("http://139.129.132.196:4399/map/coordinateArr?q=port%3A502")
+      .mimeType("application/json")
+      .get((error, response) => {
+        if (!error) {
+          let responseJSON = JSON.parse(response.responseText)
+          let result = responseJSON.result[0]
+          let data = []
+          for(let i = 0; i < result.length; i += 3) {
+            let lat = result[i]
+            let lng = result[i + 1]
+            data.push([Number(lng), Number(lat)])
+          }
+          console.log(data)
+          this.setState({data});
+        }
+      });
   }
 
   componentDidMount() {

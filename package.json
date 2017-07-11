@@ -43,7 +43,7 @@
     "react-dev-utils": "^3.0.2",
     "react-dom": "^15.6.1",
     "react-error-overlay": "^1.0.9",
-    "react-map-gl": "^2.0.3",
+    "react-map-gl": "3.0.0",
     "react-router-dom": "^4.1.1",
     "sass-loader": "^6.0.6",
     "script-loader": "^0.7.0",
