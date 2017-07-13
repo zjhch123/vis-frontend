@@ -20,11 +20,11 @@ const colorRange = [
   [209, 55, 78]
 ];
 
-const elevationScale = {min: 300, max: 500};
+const elevationScale = {min: 400, max: 500};
 
 const defaultProps = {
   radius: 15000,
-  upperPercentile: 100,
+  upperPercentile: 1000,
   coverage: 1
 };
 

@@ -17,7 +17,7 @@ var Util = {
       }).replace(/&lt;em class=&apos;hlt&apos;&gt;|&lt;\/em&gt;/g,function(arg) {
         if(arg === "&lt;em class=&apos;hlt&apos;&gt;")
           return '<em class="hlt">'
-        else if(arg === '&lt;\/em&gt;')
+        else if(arg === '&lt;/em&gt;')
           return '</em>'
       })
   },
@@ -33,6 +33,31 @@ var Util = {
       }
     }
     return true
+  },
+  asyncMap: function(arr, cb, finish) {
+    var cbs = [],
+        next = function() {
+          !cbs.length && finish && finish()
+          cbs.length && cbs.shift()()
+        },
+        abort = function() {
+          cbs = []
+          finish = null
+        }
+    for(var i = 0; i < arr.length; i++) {
+      (function(i, arr) {
+        cbs.push(function() {
+          cb(arr[i], next, i, arr)
+        })
+      })(i, arr.slice(0))
+    }
+    cbs.shift()()
+    return {
+      abort: abort
+    }
   }
 }
+
 export default Util;
+
+

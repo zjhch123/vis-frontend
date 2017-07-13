@@ -27,13 +27,13 @@ export default class SearchResult extends React.Component {
       this.renderGroupByCountry,
       this.renderGroupByOrg,
       this.renderGroupByPort,
-      this.renderGroupByTags,
-      this.renderCoordinate
+      this.renderGroupByTags
     ]
+    this.requestAsync = []
   }
 
   renderQuery(data) {
-    let totalPage = parseInt(data.total % data.pageSize === 0 ? data.total / data.pageSize : data.total / data.pageSize + 1)
+    let totalPage = parseInt(data.total % data.pageSize === 0 ? data.total / data.pageSize : data.total / data.pageSize + 1, 10)
     this.setState({
       result: data.result,
       time: data.time,
@@ -67,9 +67,6 @@ export default class SearchResult extends React.Component {
     })
   }
 
-  renderCoordinate(data) {
-  }
-
   request() {
     if(this.props.condition.q === '') {
       return
@@ -78,24 +75,23 @@ export default class SearchResult extends React.Component {
       loading: true
     })
     this.props.isLoading()
-    let promises = [
+    Util.asyncMap([
      'ics/query', 
      'ics/group?by=country&limit=7&sort=-1', 
      'ics/group?by=org&limit=5&sort=-1', 
      'ics/group?by=port&limit=5&sort=-1',
      'ics/group?by=tags&limit=5&sort=-1',
-     // 'map/coordinateArr'
-     ].map((url) => {
-      return $.getJSON({
-        url: "http://139.129.132.196:4399/" + url,
-        data: this.props.condition
-      });
-     });
-     
-     Promise.all(promises).then((data) => {
-      for(let i = 0;i < data.length; i++) {
-        this.renders[i].call(this, data[i]);
-      }
+     ], (url, next, index) => {
+      this.requestAsync.push(
+        $.getJSON({
+          url: "http://139.129.132.196:4399/" + url,
+          data: this.props.condition,
+          success: (data) => {
+            this.renders[index].call(this, data);
+            next()
+          }
+        })
+      );}, () => {
       this.setState({
         loading: false
       })
@@ -108,25 +104,24 @@ export default class SearchResult extends React.Component {
       return
     }
     this.props.isLoading()
-    let promises = [
-     'ics/query', 
-     ].map((url) => {
-      return $.getJSON({
-        url: "http://139.129.132.196:4399/" + url,
-        data: this.props.condition
-      });
-     });
-     
-     Promise.all(promises).then((data) => {
-      for(let i = 0;i < data.length; i++) {
-        this.renders[i].call(this, data[i]);
+    this.requestAsync.push($.getJSON({
+      url: "http://139.129.132.196:4399/ics/query",
+      data: this.props.condition,
+      success: (data) => {
+        this.renderQuery(data)
+        this.props.isOverLoading();
       }
-      this.props.isOverLoading()
-     });
+    }))
   }
 
   componentDidMount() {
     this.request()
+  }
+
+  componentWillUnmount() {
+    this.props.isOverLoading();
+    this.requestAsync.length && this.requestAsync.forEach((a) => {a.abort()})
+    this.requestAsync = []
   }
 
   componentWillReceiveProps(nextProps) {

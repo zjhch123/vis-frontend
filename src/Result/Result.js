@@ -6,7 +6,6 @@ import SearchResult from './SearchResult.js';
 import Util from '../Util/Util.js';
 import createHistory from 'history/createBrowserHistory';
 import SearchBar from './SearchBar.js';
-import Split from '../Commons/Split.js';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import Map from '../Map/Map.js';
@@ -26,7 +25,8 @@ export default class Result extends React.Component {
         q: '',
         page: 1,
         pageSize: 10,
-      }
+      },
+      type: 0
     }
   }
 
@@ -44,13 +44,18 @@ export default class Result extends React.Component {
   }
 
   handlerSearch(val, page, pageSize) {
-    console.log(this.loading)
     val = val || ''
     page = page || 1
     pageSize = pageSize || 10
     let newCondition = {q: val, page: page, pageSize: pageSize}
     if(Util.objIsEquals(newCondition, this.state.condition)) {return}
     this.refreshURL(newCondition)
+  }
+
+  handlerViewChange(type) {
+    this.setState({
+      type: type
+    })
   }
 
   componentWillMount() {
@@ -72,7 +77,7 @@ export default class Result extends React.Component {
     let nowPage = condition.page
     let newCondition = {
       q: condition.q,
-      page: parseInt(nowPage) - 1,
+      page: parseInt(nowPage, 10) - 1,
       pageSize: condition.pageSize
     }
     this.refreshURL(newCondition)
@@ -83,7 +88,7 @@ export default class Result extends React.Component {
     let nowPage = condition.page
     let newCondition = {
       q: condition.q,
-      page: parseInt(nowPage) + 1,
+      page: parseInt(nowPage, 10) + 1,
       pageSize: condition.pageSize
     }
     this.refreshURL(newCondition)
@@ -125,15 +130,14 @@ export default class Result extends React.Component {
     return (
       <div className={style["g-result"]}>
         <ResultHeader className={style["m-result-header"]}/>
-        <SearchBar title={Util.getUrlParam(this.props.location.search, 'q') || ''} onSearch={(val) => this.handlerSearch(val)} />
-        <Split className={style["m-split-1"]}/>
-        
+        <SearchBar title={Util.getUrlParam(this.props.location.search, 'q') || ''} onSearch={(val) => this.handlerSearch(val)} viewChange={(type) => this.handlerViewChange(type)}/>
         <main className={style["m-main"]}>
-          <SearchResult condition={this.state.condition} 
+          {this.state.type === 0 && <SearchResult condition={this.state.condition} 
                   isLoading={this.isLoading.bind(this)} 
                   isOverLoading={this.isOverLoading.bind(this)} 
                   prevPage={this.prevPage.bind(this)} 
-                  nextPage={this.nextPage.bind(this)}/>
+                  nextPage={this.nextPage.bind(this)}/>}
+          {this.state.type === 1 && <Map />}
         </main>
         <Footer className={style["m-result-footer"]}/>
       </div>
