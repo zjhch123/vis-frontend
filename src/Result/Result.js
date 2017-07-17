@@ -44,6 +44,9 @@ export default class Result extends React.Component {
   }
 
   handlerSearch(val, page, pageSize) {
+    if(this.loading) {
+      return
+    }
     val = val || ''
     page = page || 1
     pageSize = pageSize || 10
@@ -137,7 +140,10 @@ export default class Result extends React.Component {
                   isOverLoading={this.isOverLoading.bind(this)} 
                   prevPage={this.prevPage.bind(this)} 
                   nextPage={this.nextPage.bind(this)}/>}
-          {this.state.type === 1 && <Map />}
+          {this.state.type === 1 && 
+              <Map condition={this.state.condition}
+                  isLoading={this.isLoading.bind(this)} 
+                  isOverLoading={this.isOverLoading.bind(this)}/>}
         </main>
         <Footer className={style["m-result-footer"]}/>
       </div>

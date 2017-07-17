@@ -1,5 +1,6 @@
 :global(html) {
   min-height: 100%;
+  background: black;
 }
 :global(body) {
   margin: 0;

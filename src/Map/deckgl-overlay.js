@@ -38,8 +38,8 @@ export default class DeckGLOverlay extends Component {
     return {
       longitude: 110,
       latitude: 30,
-      zoom: 2,
-      minZoom: 1,
+      zoom: 3,
+      minZoom: 2.5,
       maxZoom: 15,
       pitch: 40.5,
       bearing: 0
