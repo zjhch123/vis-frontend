@@ -4,6 +4,11 @@ import Split from '../Commons/Split.js';
 import $ from 'jquery';
 
 export default class SearchBar extends React.Component {
+
+  static defaultProps =  {
+    detail: true
+  }
+
   handlerClick(cb) {
     let value = this.refs["searchInput"].value
     cb(value)
@@ -48,10 +53,12 @@ export default class SearchBar extends React.Component {
           </div>
           <span className={style["u-tip"]}>数据最新获取时间：2017年07月06日</span>
         </div>
-        <div className={style["m-row2"]}>
-          <a className={style["u-tab"] + " active"} ref="search" onClick={() => {this.viewChange(0)}}>搜索结果</a>
-          <a className={style["u-tab"]} ref="map" onClick={() => {this.viewChange(1)}}>概览</a>
-        </div>
+        { this.props.detail &&
+            <div className={style["m-row2"]}>
+              <a className={style["u-tab"] + " active"} ref="search" onClick={() => {this.viewChange(0)}}>搜索结果</a>
+              <a className={style["u-tab"]} ref="map" onClick={() => {this.viewChange(1)}}>概览</a>
+            </div>
+        }
         <Split className={style["m-split-1"]}/>
       </div>
     )

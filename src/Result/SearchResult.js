@@ -173,7 +173,7 @@ export default class SearchResult extends React.Component {
           </div>
           <div className={style["m-right"]}>
             <p className={style["u-title"]}>搜索结果: {this.state.totalCount}条 耗时: {this.state.time}ms</p>
-            {resultItems.map((item) => {return (<ResultItem data={item} key={item.ip_str}/>)})}
+            {resultItems.map((item) => {return (<ResultItem data={item} key={item.ip_str + item.module}/>)})}
           </div>
           <div style={{textAlign: 'center', width: '100%'}}>
             {this.state.nowPage > 1 && <a href="javascript:;" className={style["m-page"]} onClick={this.prevPage.bind(this)}>上一页</a>}

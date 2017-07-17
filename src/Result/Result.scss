@@ -10,7 +10,7 @@
   }
   .m-main {
     background-color: #1b1b1b;
-    height: calc(100vh - 198px);
+    min-height: calc(100vh - 198px);
     .defaultResult {
       color: white;
       text-align: center;

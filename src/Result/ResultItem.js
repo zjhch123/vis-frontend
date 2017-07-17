@@ -3,6 +3,7 @@ import Tag from '../Commons/Tag.js';
 import Split from '../Commons/Split.js';
 import style from './ResultItem.scss';
 import Util from '../Util/Util.js';
+import {Link} from 'react-router-dom';
 
 export default class ResultItem extends React.Component {
   render() {
@@ -10,7 +11,7 @@ export default class ResultItem extends React.Component {
     return (
       <div className={style["m-result-item"]}>
         <div className={style["u-content"]}>
-          <p className={style["u-ip"]}>{data.ip_str}</p>
+          <p><Link className={style["u-ip"]} to={`/host?q=ip:${data.ip_str}`}>{data.ip_str}</Link></p>
           <div className={style["m-left"]}>
             <div className={style["u-tag"]}>
               <Tag type="red" title={data.module}/><Tag type="#6666CC" title={data.tags}/>

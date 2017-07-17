@@ -37,7 +37,7 @@ export default class Result extends React.Component {
     let page = condition.page
     let pageSize = condition.pageSize
     const location = {
-      filename: '/result',
+      pathname: '/result',
       search: `q=${val}&page=${page}&pageSize=${pageSize}`
     };
     history.push(location)
@@ -132,8 +132,8 @@ export default class Result extends React.Component {
   render() {
     return (
       <div className={style["g-result"]}>
-        <ResultHeader className={style["m-result-header"]}/>
-        <SearchBar title={Util.getUrlParam(this.props.location.search, 'q') || ''} onSearch={(val) => this.handlerSearch(val)} viewChange={(type) => this.handlerViewChange(type)}/>
+        <ResultHeader/>
+        <SearchBar detail={this.state.condition.q !== ''} title={Util.getUrlParam(this.props.location.search, 'q') || ''} onSearch={(val) => this.handlerSearch(val)} viewChange={(type) => this.handlerViewChange(type)}/>
         <main className={style["m-main"]}>
           {this.state.type === 0 && <SearchResult condition={this.state.condition} 
                   isLoading={this.isLoading.bind(this)} 

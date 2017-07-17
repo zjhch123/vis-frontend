@@ -5,7 +5,6 @@ import DeckGLOverlay from './deckgl-overlay.js';
 
 import $ from 'jquery';
 
-// Set your mapbox token here
 const MAPBOX_TOKEN = "pk.eyJ1IjoiempoY2gxMjMiLCJhIjoiY2l1cDd4cWduMDAzMDJvbDhrY2Zta3NkNCJ9.3FmRDWqp0TXkgdDIWnM-vw"; // eslint-disable-line
 
 export default class Map extends React.Component {

@@ -5,13 +5,16 @@ import {
 } from 'react-router-dom';
 import Index from './Index/Index.js';
 import Result from './Result/Result.js';
+import Host from './Host/Host.js';
 
 // 这里是整个APP的路由的配置
 const App = () => (
   <Router>
     <div className="g-container">
       <Route exact path="/" component={Index}/>
+      <Route path="/index" component={Index}/>
       <Route path="/result" component={Result}/>
+      <Route path="/host" component={Host}/>
     </div>
   </Router>
 )
