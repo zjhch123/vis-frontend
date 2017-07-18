@@ -1,4 +1,5 @@
 /* global window,document */
+import Config from '../Config/Config.js'
 import React from 'react';
 import MapGL from 'react-map-gl';
 import DeckGLOverlay from './deckgl-overlay.js';
@@ -25,7 +26,7 @@ export default class Map extends React.Component {
   request() {
     this.props.isLoading()
     this.requestAsync = $.ajax({
-      url: "http://139.129.132.196:4399/map/coordinateArr",
+      url: `${Config.url}map/coordinateArr`,
       data: {
         q: this.props.condition.q
       },

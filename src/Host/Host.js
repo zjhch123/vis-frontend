@@ -1,3 +1,4 @@
+import Config from '../Config/Config.js';
 import React from 'react'
 import ResultHeader from '../Commons/ResultHeader.js'
 import SearchBar from '../Result/SearchBar.js'
@@ -52,7 +53,7 @@ export default class Host extends React.Component {
   request() {
     $.get({
       dataType: 'json',
-      url: 'http://139.129.132.196:4399/ics/host',
+      url: `${Config.url}ics/host`,
       data: {
         q: Util.getUrlParam(window.location.search, 'q')
       },

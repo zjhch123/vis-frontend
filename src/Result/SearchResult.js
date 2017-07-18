@@ -1,3 +1,4 @@
+import Config from '../Config/Config.js'
 import React from 'react';
 import ResultItem from './ResultItem.js';
 import $ from 'jquery';
@@ -84,7 +85,7 @@ export default class SearchResult extends React.Component {
      ], (url, next, index) => {
       this.requestAsync.push(
         $.getJSON({
-          url: "http://139.129.132.196:4399/" + url,
+          url: Config.url + url,
           data: this.props.condition,
           success: (data) => {
             this.renders[index].call(this, data);
@@ -105,7 +106,7 @@ export default class SearchResult extends React.Component {
     }
     this.props.isLoading()
     this.requestAsync.push($.getJSON({
-      url: "http://139.129.132.196:4399/ics/query",
+      url: `${Config.url}ics/query`,
       data: this.props.condition,
       success: (data) => {
         this.renderQuery(data)
