@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "鉴势",
+  "name": "鉴势 - 工控设备在线搜索与可视化平台",
   "icons": [
     {
       "src": "favicon.ico",
