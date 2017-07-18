@@ -166,10 +166,10 @@ export default class SearchResult extends React.Component {
         <div className={style["m-container"]}>
           <div className={style["m-left"]}>
             <div id="temp" ref="temp"></div>
-            <ListItem data={this.state.groupByPort} title="端口"/>
-            <ListItem data={this.state.groupByCountry} title="国家分布"/>
-            <ListItem data={this.state.groupByOrg} title="企业分布"/>
-            <ListItem data={this.state.groupByTags} title="设备类型分布"/>
+            <ListItem data={this.state.groupByPort} title="端口" condition="port"/>
+            <ListItem data={this.state.groupByCountry} title="国家分布" condition="countryName"/>
+            <ListItem data={this.state.groupByOrg} title="企业分布" condition="org"/>
+            <ListItem data={this.state.groupByTags} title="设备类型分布" condition="tags"/>
           </div>
           <div className={style["m-right"]}>
             <p className={style["u-title"]}>搜索结果: {this.state.totalCount}条 耗时: {this.state.time}ms</p>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Tag from '../Commons/Tag.js';
+import Tag from './Tag.js';
 import Split from '../Commons/Split.js';
 import style from './ResultItem.scss';
 import Util from '../Util/Util.js';

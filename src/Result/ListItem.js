@@ -11,7 +11,7 @@ export default class ListItem extends React.Component {
       <div>
         {
           this.props.data.map((data) => {
-            return <Item data={data} key={data.key}/>
+            return <Item data={data} key={data.key} condition={this.props.condition}/>
           })
         }
       </div>
