@@ -3,7 +3,7 @@ import Header from '../Commons/Header.js'
 import Footer from '../Commons/Footer.js'
 import Banner from '../Commons/Banner.js'
 import BannerTitle from '../Commons/BannerTitle.js'
-import style from './About.scss'
+// import style from './About.scss'
 
 export default class About extends React.Component {
   render() {

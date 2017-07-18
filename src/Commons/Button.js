@@ -5,7 +5,7 @@ class Button extends React.Component {
   render() {
     return (
       <div className={style.btn_father + " " + this.props.className}>
-        <a href="javascript:;" className={style.btn + " " + style[this.props.type]} onClick={() => this.props.click && this.props.click()}>
+        <a className={style.btn + " " + style[this.props.type]} onClick={() => this.props.click && this.props.click()}>
           {this.props.title}
         </a>
       </div>

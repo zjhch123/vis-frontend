@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './Item.scss';
 import Util from '../Util/Util.js';
-import {Link} from 'react-router-dom';
 
 export default class Item extends React.Component {
   render() {

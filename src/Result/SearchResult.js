@@ -176,8 +176,8 @@ export default class SearchResult extends React.Component {
             {resultItems.map((item) => {return (<ResultItem data={item} key={item.ip_str + item.module}/>)})}
           </div>
           <div style={{textAlign: 'center', width: '100%'}}>
-            {this.state.nowPage > 1 && <a href="javascript:;" className={style["m-page"]} onClick={this.prevPage.bind(this)}>上一页</a>}
-            {this.state.nowPage < this.state.totalPage && <a href="javascript:;" className={style["m-page"]} onClick={this.nextPage.bind(this)}>下一页</a>}
+            {this.state.nowPage > 1 && <a className={style["m-page"]} onClick={this.prevPage.bind(this)}>上一页</a>}
+            {this.state.nowPage < this.state.totalPage && <a className={style["m-page"]} onClick={this.nextPage.bind(this)}>下一页</a>}
           </div>
         </div>
       )

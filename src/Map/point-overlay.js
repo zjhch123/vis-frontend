@@ -1,13 +1,10 @@
 import {SVGOverlay} from 'react-map-gl'
 import React from 'react';
+import PropTypes from 'prop-types';
 import r from 'r-dom';
 import assign from 'object-assign';
 
 export default class PointOverlay extends React.Component {
-
-  static propTypes = {
-    locations: React.PropTypes.array.isRequired,
-  }
 
   render() {
     return r(SVGOverlay, assign({}, this.props, {
@@ -29,3 +26,9 @@ export default class PointOverlay extends React.Component {
     }))
   }
 }
+
+PointOverlay.PropTypes = {
+  locations: PropTypes.array.isRequired,
+}
+
+

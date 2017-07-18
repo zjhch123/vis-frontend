@@ -9,6 +9,9 @@
   min-width: 1090px;
   min-height: 600px;
 }
+:global(a) {
+  cursor: pointer;
+}
 @font-face {
   font-family: 'sans';
   src: url('./font/webfont.eot'); /* IE9*/

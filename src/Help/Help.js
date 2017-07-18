@@ -3,7 +3,7 @@ import Header from '../Commons/Header.js'
 import Footer from '../Commons/Footer.js'
 import Banner from '../Commons/Banner.js'
 import BannerTitle from '../Commons/BannerTitle.js'
-import style from './Help.scss'
+// import style from './Help.scss'
 
 export default class Help extends React.Component {
   render() {
