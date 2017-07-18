@@ -12,8 +12,8 @@ export default class ResultHeader extends React.Component {
           <NavLink exact to="/result" className={style["link-item"]} activeClassName={style["active"]}>势窗</NavLink>
           <NavLink exact to="/" className={style["link-item"]} activeClassName={style["active"]}>势界</NavLink>
           <NavLink exact to="/" className={style["link-item"]} activeClassName={style["active"]}>开放API</NavLink>
-          <NavLink exact to="/" className={style["link-item"]} activeClassName={style["active"]}>帮助</NavLink>
-          <NavLink exact to="/" className={style["link-item"]} activeClassName={style["active"]}>关于我们</NavLink>
+          <NavLink exact to="/help" className={style["link-item"]} activeClassName={style["active"]}>帮助</NavLink>
+          <NavLink exact to="/about" className={style["link-item"]} activeClassName={style["active"]}>关于我们</NavLink>
         </div>
         <div className={style["g-right"]}>
           <Link to="/register" className={style["link-item"]}>注册</Link>
