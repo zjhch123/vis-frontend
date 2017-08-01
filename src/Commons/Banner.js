@@ -1,8 +1,6 @@
 import React from 'react'
 import style from './Banner.scss'
 
-
-
 export default class Banner extends React.Component {
   render() {
     return (

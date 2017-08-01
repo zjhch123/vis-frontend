@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../Commons/Header.js'
-import Footer from '../Commons/Footer.js'
+import Footer from '../Commons/Footer2.js'
 import Banner from '../Commons/Banner.js'
 import BannerTitle from '../Commons/BannerTitle.js'
 // import style from './About.scss'
