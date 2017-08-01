@@ -4,7 +4,7 @@ import './Footer.scss';
 function Footer(props) {
   return (
     <footer className={props.className}>
-      <p>© 2016 Mjxz All Rights reserved Hangzhou Dianzi University.</p>
+      <p>Copyright © 2016 - 2017 Team of Trace Seeker. All Rights Reserved</p>
     </footer>
   );
 }
