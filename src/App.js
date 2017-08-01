@@ -9,7 +9,7 @@ import Host from './Host/Host.js';
 import Help from './Help/Help.js';
 import About from './About/About.js';
 
-console.log(new Date())
+console.log(new Date());
 
 // 这里是整个APP的路由的配置
 const App = () => (
