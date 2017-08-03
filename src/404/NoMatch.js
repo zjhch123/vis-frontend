@@ -3,19 +3,32 @@ import style from './NoMatch.scss';
 import Header from '../Commons/ResultHeader.js';
 import SearchBar from '../Result/SearchBar';
 import Footer from '../Commons/Footer2.js';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 export default class NoMatch extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      condition: {
         q: '',
-      }
     }
   }
 
+  handlerSearch(val) {
+    this.setState({
+      q: val
+    })
+  }
+
   render() {
+    const query = this.state.q;
+    if(query !== '') {
+      return (
+        <Redirect push to={{
+          pathname: '/result',
+          search: 'q=' + query
+        }}/>
+      )
+    }
     return (
       <div className={this.props.className}>
         <Header />
