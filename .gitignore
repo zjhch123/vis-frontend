@@ -7,7 +7,7 @@
 /coverage
 
 # production
-/build/js/*.map
+*.map
 
 # misc
 .DS_Store
