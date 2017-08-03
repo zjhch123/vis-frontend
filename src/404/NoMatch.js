@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './NoMatch.scss';
+import Split from '../Commons/Split';
 import Header from '../Commons/ResultHeader.js';
 import SearchBar from '../Result/SearchBar';
 import Footer from '../Commons/Footer2.js';
@@ -37,6 +38,7 @@ export default class NoMatch extends React.Component {
           <h1>:( 页面还在架构中</h1>
           <h2>这个页面被吸入了宇宙的洪流中，您可以尝试<Link to="/index">返回首页</Link></h2>
         </main>
+        <Split />
         <Footer />
       </div>
     )
