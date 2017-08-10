@@ -13,8 +13,8 @@ export default class Header extends React.Component {
           <Link to="/" className={style["link-item"]}>首页</Link>
           <NavLink exact to="/result" className={style["link-item"]} activeClassName={style["active"]}>势窗</NavLink>
           <a href="http://139.129.132.196/ics/vis.html" className={style["link-item"]}>势界</a>
-          <NavLink exact to="/2" className={style["link-item"]} activeClassName={style["active"]}>开放API</NavLink>
-          <a href="http://139.129.132.196/ics/help.html" className={style["link-item"]}>开放API</a>
+          <NavLink exact to="/open" className={style["link-item"]} activeClassName={style["active"]}>开放API</NavLink>
+          <a href="http://139.129.132.196/ics/help.html" className={style["link-item"]}>帮助</a>
           <NavLink exact to="/about" className={style["link-item"]} activeClassName={style["active"]}>关于我们</NavLink>
         </div>
       </header>
