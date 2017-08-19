@@ -1,14 +1,16 @@
-import React from 'react'
-import { Router, Route, Switch } from 'react-router'
-import Main from './containers/Main'
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom';
+import Main from './containers/Main';
 import createHistory from 'history/createBrowserHistory';
 
-const history = createHistory();
-
 const routes = () => (
-  <Router history={history}>
+  <Router>
     <Switch>
-      <Route path="/" component={Main} />
+      <Route path="/" exact component={Main} />
       <Route path="/index" component={Main} />
     </Switch>
   </Router>
