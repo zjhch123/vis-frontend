@@ -8,5 +8,27 @@
     height: calc(100vh - 96px);
     min-height: 504px;
     text-align: center;
+    .u-title {
+      color: rgb(0, 170, 255);
+      display: block;
+      font-size: 32px;
+    }
+    .m-input {
+      margin: 20px 0;
+      .u-input {
+        font-size: 16px;
+        width: 706px;
+        height: 37px;
+        outline: none;
+        padding: 0 10px;
+        background-color: transparent;
+        border: 1px solid #00affd;
+        color: white;
+        box-sizing: border-box;
+        &:focus {
+          border: 2px solid rgb(153, 204, 255);
+        }
+      }
+    }
   }
 }
