@@ -1,0 +1,12 @@
+.c-main {
+  background-image: url("../../resource/image/icsmap.png");
+  background-color: black;
+  background-size: 80% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+  .g-main {
+    height: calc(100vh - 96px);
+    min-height: 504px;
+    text-align: center;
+  }
+}
