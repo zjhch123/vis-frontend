@@ -14,7 +14,7 @@ class Main extends React.Component {
     this.timeInterval = null;
     this.scrollInput = ['port:102', 'country:cn', 'module:s7', 'port:502 country:cn'];
     this.scrollIndex = 1;
-    this.queryCondition = '';
+    this.queryCondition = 'port:102';
   }
 
   componentDidMount() {
