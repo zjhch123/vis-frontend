@@ -1,6 +1,8 @@
 import {combineReducers} from 'redux';
-import main from './main';
+import {routerReducer} from 'react-router-redux';
+import query from './query';
 
 export default combineReducers({
-  main
+  query,
+  router: routerReducer
 });

@@ -1,7 +1,6 @@
 import ActionTypes from '../action-types/';
 
-export const search = (condition) => ({
-  type: ActionTypes.main.mainQuery,
+export const Search = (condition) => ({
+  type: ActionTypes.main.Query,
   payload: condition
 });
-

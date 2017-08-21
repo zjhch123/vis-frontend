@@ -1,11 +1,11 @@
 import React from 'react';
 import Header from '../../components/IndexHeader/Header';
-import IndexLogo from '../../components/IndexLogo/IndexLogo';
+import SVGLogo from '../../components/Logo/SVGLogo';
 import Button from '../../components/Button/Button';
 import Footer from '../../components/IndexFooter/Footer';
 import style from './Main.scss';
 import { connect } from 'react-redux';
-
+import { push } from 'react-router-redux';
 
 class Main extends React.Component {
 
@@ -14,12 +14,16 @@ class Main extends React.Component {
     this.timeInterval = null;
     this.scrollInput = ['port:102', 'country:cn', 'module:s7', 'port:502 country:cn'];
     this.scrollIndex = 1;
+    this.queryCondition = '';
   }
 
   componentDidMount() {
     this.timeInterval = setInterval(() => {
       let inputValue = this.scrollInput[this.scrollIndex];
       this.refs.searchInput.setAttribute('placeholder', inputValue);
+      if (this.refs.searchInput.value === '') {
+        this.queryCondition = inputValue;
+      }
       this.scrollIndex = (this.scrollIndex + 1) % 4;
     }, 2000);
   }
@@ -28,19 +32,23 @@ class Main extends React.Component {
     window.clearInterval(this.timeInterval);
   }
 
+  handlerChange(event) {
+    this.queryCondition = event.target.value;
+  }
+
   render() {
     return (
       <div className={style.cMain}>
         <Header />
         <main className={style.gMain}>
           <div className={style.mMain}>
-            <IndexLogo />
+            <SVGLogo className={style.uLogo} src={require('../../resource/image/logo.svg')} width="170px" height="170px" />
             <h1 className={style.uTitle}>工控设备在线搜索与可视化平台</h1>
             <div className={style.mInput}>
-              <input type="text" className={style.uInput} ref="searchInput" placeholder={this.scrollInput[0]}/>
+              <input type="text" className={style.uInput} ref="searchInput" placeholder={this.scrollInput[0]} onChange={(e) => this.handlerChange(e)}/>
             </div>
             <div className={style.mBtnGroup}>
-              <Button title="鉴势一下" className={style.uBtn} type="blue" onClick={() => console.log(1)}/>
+              <Button title="鉴势一下" className={style.uBtn} type="blue" onClick={() => this.props.StartSearch(this.queryCondition)}/>
               <Button title="高级搜索" className={style.uBtn} type="gray" onClick={() => console.log(1)}/>
             </div>
             <div className={style.mTip}>
@@ -54,5 +62,17 @@ class Main extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
 
-export default Main;
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    StartSearch: (condition) => {
+      condition && dispatch(push({
+        pathname: '/search',
+        search: `q=${condition}&_=${Date.now()}`
+      }));
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
