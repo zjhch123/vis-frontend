@@ -11,7 +11,12 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.title = Util.getUrlParam(this.props.location.search, 'q');
+    this.title = Util.getUrlParam(this.props.location.search, 'q') || '';
+    this.searchBarInputValue = this.title;
+  }
+
+  componentWillUpdate(nextProps) {
+    this.title = Util.getUrlParam(nextProps.location.search, 'q') || '';
     this.searchBarInputValue = this.title;
   }
 
@@ -26,14 +31,34 @@ class Search extends React.Component {
     }));
   }
 
+  renderNotInpuView() {
+    return (
+      <div className={style.cNotInput}>
+        <h1>请输入搜索条件</h1>
+      </div>
+    )
+  }  
+
+  renderResultView() {
+
+  }
+
   render() {
+    let view;
+    if (this.title === '') {
+      view = this.renderNotInpuView();
+    } else {
+      view = this.renderResultView();
+    }
     return (
       <div className={style.cSearch}>
         <Header />
         <main>
           <SearchBar title={this.title}
               inputValueChange={(e) => this.handlerSearchBarValueChange(e)}
-              submitClick={() => this.handlerSearchBarSubmitClick()}/>
+              submitClick={() => this.handlerSearchBarSubmitClick()}
+              detail={this.title !== ''}/>
+          {view}
         </main>
         <Footer />
       </div>

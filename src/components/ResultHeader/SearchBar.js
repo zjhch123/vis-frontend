@@ -1,23 +1,17 @@
 import React from 'react';
 import style from './SearchBar.scss';
 import Split from '../Split/Split';
-import IMGLogo from '../Logo/IMGLogo';
-
+import Brand from '../Brand/Brand';
 export default ({title, detail, inputValueChange, submitClick}) => (
   <div className={`${style.cSearchBar}`}>
     <div className={style.mRow1}>
-      <div className={style.mLogo}>
-        <IMGLogo className={style.uLogoImg} src={require('../../resource/image/logo.png')} width="56px" height="56px"/>
-        <div className={style.uLogoLabel}>
-          <p className={style.uLogoTitle}>鉴势</p>
-          <p className={style.uLogoSubtitle}>工控设备搜索平台</p>
-        </div>
-      </div>
+      <Brand className={style.mBrand}/>
       <div className={style.mForm}>
         <input type="text" className={style.uInput}  
               placeholder="请输入查询条件"
               defaultValue={title || ''} 
-              onChange={(e) => inputValueChange(e)}/>
+              onChange={(e) => inputValueChange(e)}
+              onKeyDown={(e) => e.keyCode === 13 && submitClick()}/>
         <a className={style.mBtn} 
             onClick={() => submitClick()}>
             立即鉴势

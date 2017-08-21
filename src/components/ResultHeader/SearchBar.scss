@@ -9,36 +9,8 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    .m-logo {
+    .m-brand {
       flex: 0 0 auto;
-      height: 56px;
-      display: flex;
-      align-items: center;
-      .u-logo-img {
-        height: 56px;
-        width: 56px;
-      }
-      .u-logo-label {
-        padding-left: 8px;
-        display: inline-flex;
-        color: white;
-        flex-direction: column;
-        line-height: 1.5;
-        p {
-          margin: 0;
-          font-size: 14px;
-          position: relative;
-        }
-        .u-logo-title:after {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          height: 1px;
-          content: "";
-          left: 0;
-          background: white;
-        }
-      }
     }
     .m-form {
       flex: 1;
