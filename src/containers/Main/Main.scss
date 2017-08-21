@@ -8,6 +8,17 @@
     height: calc(100vh - 96px);
     min-height: 504px;
     text-align: center;
+    &:before {
+      height: 100%;
+      width: 1px;
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .m-main {
+      display: inline-block;
+      vertical-align: middle;
+    }
     .u-title {
       color: rgb(0, 170, 255);
       display: block;
@@ -30,5 +41,16 @@
         }
       }
     }
+    .m-btn-group {
+      .u-btn {
+        margin: 0 16px;
+      }
+    }
+    .m-tip {
+      margin: 10px 0;
+      color: #fff;
+      font-size: 12px;
+    }
+
   }
 }

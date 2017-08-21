@@ -6,7 +6,7 @@ import style from './Header.scss';
 export default class Header extends React.Component {
   render() {
     return (
-      <header className={`${style.cHeader} ${this.props.className} f-cb`}>
+      <header className={`${style.cHeader} ${this.props.className || ''} f-cb`}>
         <div className={style.gLeft}>
           <Link to={URL.Index} className={`${style.mLogo} ${style.uLinkItem}`}>鉴势</Link>
         </div>
