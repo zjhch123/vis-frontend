@@ -58,6 +58,7 @@ class Search extends React.Component {
               inputValueChange={(e) => this.handlerSearchBarValueChange(e)}
               submitClick={() => this.handlerSearchBarSubmitClick()}
               detail={this.title !== ''}/>
+          <aside></aside>
           {view}
         </main>
         <Footer />
