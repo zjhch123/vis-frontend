@@ -36,6 +36,12 @@ class Main extends React.Component {
     this.queryCondition = event.target.value;
   }
 
+  handlerKeyDown(e) {
+    if (e.keyCode === 13) {
+      this.props.StartSearch(this.queryCondition);
+    }
+  }
+
   render() {
     return (
       <div className={style.cMain}>
@@ -45,7 +51,7 @@ class Main extends React.Component {
             <SVGLogo className={style.uLogo} src={require('../../resource/image/logo.svg')} width="170px" height="170px" />
             <h1 className={style.uTitle}>工控设备在线搜索与可视化平台</h1>
             <div className={style.mInput}>
-              <input type="text" className={style.uInput} ref="searchInput" placeholder={this.scrollInput[0]} onChange={(e) => this.handlerChange(e)}/>
+              <input type="text" className={style.uInput} ref="searchInput" placeholder={this.scrollInput[0]} onChange={(e) => this.handlerChange(e)} onKeyDown={(e) => this.handlerKeyDown(e)}/>
             </div>
             <div className={style.mBtnGroup}>
               <Button title="鉴势一下" className={style.uBtn} type="blue" onClick={() => this.props.StartSearch(this.queryCondition)}/>
