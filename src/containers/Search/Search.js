@@ -7,7 +7,7 @@ import ItemList from '../../components/ItemList/ItemList';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import Util from '../../util';
-import {SearchAction} from '../../actions';
+import {SearchAction, GroupAction} from '../../actions';
 import ResultItem from '../../components/ResultItem/ResultItem';
 
 const Tip = ({title}) => (
@@ -20,7 +20,7 @@ class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.mapQueryCondition();
+    this.mapQueryCondition(props);
   }
 
   componentDidMount() {
@@ -28,13 +28,13 @@ class Search extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    this.mapQueryCondition();
+    this.mapQueryCondition(nextProps);
   }
 
-  mapQueryCondition() {
-    this.title = Util.getUrlParam(nextProps.location.search, 'q') || '';
-    this.page = Util.getUrlParam(this.props.location.search, 'page') || 1;
-    this.pageSize = Util.getUrlParam(this.props.location.search, 'pageSize') || 10;
+  mapQueryCondition(props) {
+    this.title = Util.getUrlParam(props.location.search, 'q') || '';
+    this.page = Util.getUrlParam(props.location.search, 'page') || 1;
+    this.pageSize = Util.getUrlParam(props.location.search, 'pageSize') || 10;
     this.searchBarInputValue = this.title;
   }
 
@@ -43,31 +43,44 @@ class Search extends React.Component {
   }
 
   handlerSearchBarSubmitClick() {
-    this.props.dispatch(push({
-      location: '/search',
-      search: `q=${this.searchBarInputValue}&_=${Date.now()}`
-    }));
-    this.props.dispatch(SearchAction(this.searchBarInputValue, this.page, this.pageSize));
+    this.refreshLocation(this.searchBarInputValue, this.page, this.pageSize);
+    this.dispatchSearch(this.searchBarInputValue, this.page, this.pageSize);
   }
 
-  renderNotInpuView() {
-    return <Tip title="请输入搜索条件" />
+  refreshLocation(condition, page, pageSize) {
+    this.props.dispatch(push({
+      location: '/search',
+      search: `q=${condition}&_=${Date.now()}&page=${page}&pageSize=${pageSize}`
+    }));
+  }
+
+  dispatchSearch(condition, page, pageSize) {
+    this.props.dispatch(SearchAction(condition, page, pageSize));
+  }
+
+  dispatchGroup(condition, by, limit, order, pageSize) {
+
+  }
+
+  renderTip(title) {
+    return <Tip title={title} />
   }  
 
   renderLoadingView() {
-    return <Tip title="正在查询" />
+    return this.renderTip("正在查询");
   }
 
   renderOverLoadingView() {
-    return this.props.searchResult.result === false ? this.renderSearchErrorView() : this.renderSearchSuccessView(this.props.searchResult.result);
+    return (this.props.searchResult.result === false ? this.renderSearchErrorView() 
+                      : this.renderSearchSuccessView(this.props.searchResult.result));
   }
 
   renderSearchErrorView() {
-    return <Tip title="服务器开小差了，请重新查询 :（" />
+    return this.renderTip("服务器开小差了，请重新查询 :（");
   }
 
   renderNoResultView() {
-    return <Tip title={`未找到和${this.title}相关的结果 :（`} />
+    return this.renderTip(`未找到和${this.title}相关的结果 :（`);
   }
 
   renderSearchSuccessView(data) {
@@ -102,7 +115,7 @@ class Search extends React.Component {
           submitClick={() => this.handlerSearchBarSubmitClick()}
           detail={this.title !== ''}/>
         <main>
-          {`<aside>
+          {true ? '' : `<aside>
             <ItemList data={{}} title="端口" condition="port"/>
             <ItemList data={{}} title="国家分布" condition="countryName"/>
             <ItemList data={{}} title="企业分布" condition="org"/>
@@ -120,7 +133,8 @@ class Search extends React.Component {
 
 const mapStateToProps = (state) => ({
   location: state.router.location,
-  searchResult: state.search
+  searchResult: state.search,
+  groupResult: state.group
 })
 
 const mapDispatchToProps = (dispatch) => ({
