@@ -24,7 +24,8 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch(SearchAction(this.title, this.page, this.pageSize));
+    this.dispatchSearch(this.title, this.page, this.pageSize);
+    this.groupCondition(this.title);
   }
 
   componentWillUpdate(nextProps) {
@@ -38,6 +39,13 @@ class Search extends React.Component {
     this.searchBarInputValue = this.title;
   }
 
+  groupCondition(condition) {
+    this.dispatchGroup(condition, 'port', 5, -1, 10);
+    this.dispatchGroup(condition, 'tags', 5, -1, 10);
+    this.dispatchGroup(condition, 'org', 5, -1, 10);
+    this.dispatchGroup(condition, 'country', 7, -1, 10);
+  }
+
   handlerSearchBarValueChange(e) {
     this.searchBarInputValue = e.target.value;
   }
@@ -45,6 +53,7 @@ class Search extends React.Component {
   handlerSearchBarSubmitClick() {
     this.refreshLocation(this.searchBarInputValue, this.page, this.pageSize);
     this.dispatchSearch(this.searchBarInputValue, this.page, this.pageSize);
+    this.groupCondition(this.searchBarInputValue);
   }
 
   refreshLocation(condition, page, pageSize) {
@@ -59,7 +68,7 @@ class Search extends React.Component {
   }
 
   dispatchGroup(condition, by, limit, order, pageSize) {
-
+    this.props.dispatch(GroupAction({condition, by, limit, order}));
   }
 
   renderTip(title) {
@@ -110,17 +119,29 @@ class Search extends React.Component {
       <div className={style.cSearch}>
         <Header />
         <SearchBar 
-          title={this.title}
-          inputValueChange={(e) => this.handlerSearchBarValueChange(e)}
-          submitClick={() => this.handlerSearchBarSubmitClick()}
-          detail={this.title !== ''}/>
+            title={this.title}
+            inputValueChange={(e) => this.handlerSearchBarValueChange(e)}
+            submitClick={() => this.handlerSearchBarSubmitClick()}
+            detail={this.title !== ''}/>
         <main>
-          {true ? '' : `<aside>
-            <ItemList data={{}} title="端口" condition="port"/>
-            <ItemList data={{}} title="国家分布" condition="countryName"/>
-            <ItemList data={{}} title="企业分布" condition="org"/>
-            <ItemList data={{}} title="设备类型分布" condition="tags"/>
-          </aside>`}
+          <aside>
+          {
+            this.props.groupResult.port && !this.props.groupResult.port.isLoading &&
+            <ItemList data={this.props.groupResult.port.result.port} title="端口" condition="port"/>
+          }
+          {
+            this.props.groupResult.port && !this.props.groupResult.port.isLoading &&
+            <ItemList data={this.props.groupResult['country'].result['location.country_name_row']} title="国家分布" condition="countryName"/>
+          }
+          {
+            this.props.groupResult.port && !this.props.groupResult.port.isLoading &&
+            <ItemList data={this.props.groupResult.org.result.org_row} title="企业分布" condition="org"/>
+          }
+          {
+            this.props.groupResult.port && !this.props.groupResult.port.isLoading &&
+            <ItemList data={this.props.groupResult.tags.result.tags} title="设备类型分布" condition="tags"/>
+          }
+          </aside>
           <div>
             {view}
           </div>

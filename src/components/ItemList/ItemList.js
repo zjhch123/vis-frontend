@@ -8,7 +8,7 @@ export default ({title, data, condition}) => (
     <p className={style.uTitle}>{title}</p>  
     <div>
       {
-        data.map((data, index) => <Item data={data} key={index} condition={condition}/>)
+        data.buckets.map((_d, index) => <Item data={_d} key={index} condition={condition}/>)
       }
     </div>
     <Split />

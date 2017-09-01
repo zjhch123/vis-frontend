@@ -12,7 +12,7 @@ const single = (state = {
       return {
         ...state,
         isLoading: false,
-        result: action.payload
+        result: action.payload.aggregations || []
       }
     case 'GROUP_ERROR': 
       return {
@@ -31,8 +31,8 @@ const group = (state = {}, action) => {
     case 'GROUP_ERROR':
     case 'GROUP_SUCCESS':
       const by = action.by;
-      state[by] = state[by] || {};
-      return single(state[by], action);
+      state[by] = single(state[by] || {}, action);
+      return state;
     default:
       return state;
   }

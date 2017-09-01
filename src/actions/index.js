@@ -1,4 +1,3 @@
-import ActionTypes from '../action-types/';
 import {SearchAPI, GroupAPI} from '../api';
 
 const SearchStart = (condition) => ({
@@ -43,7 +42,7 @@ export const GroupAction = ({condition, by, limit, order, page, pageSize}) => (d
   order = order || -1;
   page = page || 1;
   pageSize = pageSize || 10;
-  dispatch(GroupStart({condition, by, limit, order, page, pageSize}));
+  dispatch(GroupStart(by));
   GroupAPI(condition, by, limit, order, page, pageSize)
     .then(json => dispatch(GroupSuccess(by, json)))
     .catch(error => dispatch(GroupError(by)));
