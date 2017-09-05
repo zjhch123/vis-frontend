@@ -32,8 +32,4 @@ html { font-size: 14px; }
   clear: both;
   display: table;
 }
-body, html {
-  min-height: 600px;
-  min-width: 1090px;
-  background: black;
-}
+body, html {min-height: 600px;min-width: 1090px;background-color: black;}

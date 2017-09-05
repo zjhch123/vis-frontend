@@ -2,7 +2,8 @@ import React from 'react';
 import style from './SearchBar.scss';
 import Split from '../Split/Split';
 import Brand from '../Brand/Brand';
-export default ({title, detail, inputValueChange, submitClick}) => (
+
+export default ({title, detail, inputValueChange, submitClick, activePage, changePageType}) => (
   <div className={`${style.cSearchBar}`}>
     <div className={style.mRow1}>
       <Brand className={style.mBrand}/>
@@ -22,8 +23,8 @@ export default ({title, detail, inputValueChange, submitClick}) => (
     { 
       detail &&
         <div className={style.mRow2}>
-          <a className={`${style.uTab} active`}>搜索结果</a>
-          <a className={style.uTab}>概览</a>
+          <a className={`${style.uTab} ${activePage === 0 ? 'active' : ''}`} onClick={(e) => changePageType(0)}>搜索结果</a>
+          <a className={`${style.uTab} ${activePage === 1 ? 'active' : ''}`} onClick={(e) => changePageType(1)}>概览</a>
         </div>
     }
     <Split />

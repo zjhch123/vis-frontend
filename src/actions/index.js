@@ -1,4 +1,4 @@
-import {SearchAPI, GroupAPI} from '../api';
+import {SearchAPI, GroupAPI, MapAPI, HostAPI} from '../api';
 
 const SearchStart = (condition) => ({
   type: 'SEARCH_START',
@@ -30,6 +30,38 @@ const GroupError = (by) => ({
   by
 });
 
+const MapStart = (condition) => ({
+  type: 'MAP_START',
+  condition
+});
+
+const MapSuccess = (condition, payload) => ({
+  type: 'MAP_SUCCESS',
+  condition,
+  payload
+});
+
+const MapError = (condition) => ({
+  type: 'MAP_ERROR',
+  condition
+});
+
+const HostStart = (condition) => ({
+  type: 'HOST_START',
+  condition
+});
+
+const HostSuccess = (condition, payload) => ({
+  type: 'HOST_SUCCESS',
+  condition,
+  payload
+});
+
+const HostError = (condition) => ({
+  type: 'HOST_ERROR',
+  condition
+});
+
 export const SearchAction = (condition, page, pageSize) => (dispatch) => {
   dispatch(SearchStart({condition, page, pageSize}));
   SearchAPI(condition, page, pageSize)
@@ -48,5 +80,17 @@ export const GroupAction = ({condition, by, limit, order, page, pageSize}) => (d
     .catch(error => dispatch(GroupError(by)));
 };
 
+export const MapAction = (condition) => (dispatch) => {
+  dispatch(MapStart(condition));
+  MapAPI(condition)
+    .then(json => dispatch(MapSuccess(condition, json)))
+    .catch(error => dispatch(MapError(condition)));
+}
 
+export const HostAction = (condition) => (dispatch) => {
+  dispatch(HostStart(condition));
+  HostAPI(condition)
+    .then(json => dispatch(HostSuccess(condition, json)))
+    .catch(error => dispatch(HostError(condition)));
+}
 

@@ -7,7 +7,8 @@ import GroupList from '../../components/GroupList/GroupList';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import Util from '../../util';
-import {SearchAction, GroupAction} from '../../actions';
+import {SearchAction, GroupAction, MapAction} from '../../actions';
+import Map from '../../components/SearchMap/Map';
 import ResultItem from '../../components/ResultItem/ResultItem';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
@@ -25,6 +26,9 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.mapQueryCondition(props);
+    this.state = {
+      pageType: 0
+    }
   }
 
   componentDidMount() {
@@ -43,6 +47,15 @@ class Search extends React.Component {
     this.searchBarInputValue = this.title;
   }
 
+  refreshView(pageType) {
+    if (pageType === 0) {
+      this.props.dispatchSearch(this.searchBarInputValue, 1, this.pageSize);
+      this.props.dispatchGroups(this.searchBarInputValue);
+    } else if (pageType === 1) {
+      this.props.dispatchMap(this.searchBarInputValue);
+    }
+  }
+
   handlerSearchBarValueChange(e) {
     this.searchBarInputValue = e.target.value;
   }
@@ -51,15 +64,20 @@ class Search extends React.Component {
     if (this.title === this.searchBarInputValue) {
       return;
     }
-    this.props.refreshLocation(this.searchBarInputValue, this.page, this.pageSize);
-    this.props.dispatchSearch(this.searchBarInputValue, this.page, this.pageSize);
-    this.props.dispatchGroups(this.searchBarInputValue);
+    this.props.refreshLocation(this.searchBarInputValue, 1, this.pageSize);
+    this.refreshView(this.state.pageType);
   }
 
   handlerPage(nextPage) {
-    window.scrollTo(0, 0);
     this.props.refreshLocation(this.searchBarInputValue, nextPage, this.pageSize);
     this.props.dispatchSearch(this.searchBarInputValue, nextPage, this.pageSize);
+  }
+
+  handlerChangePageType(type) {
+    this.setState({
+      pageType: type
+    });
+    this.refreshView(type);
   }
 
   renderTip(title) {
@@ -71,9 +89,14 @@ class Search extends React.Component {
     return this.renderTip("正在查询");
   }
 
+  renderNotInputView() {
+    return this.renderTip("请输入查询条件"); 
+  }
+
   renderOverLoadingView() {
-    return (this.props.searchResult.result === false ? this.renderSearchErrorView() 
-                      : this.renderSearchSuccessView(this.props.searchResult.result));
+    return this.props.searchResult.result === false ? 
+                this.renderSearchErrorView() : 
+                this.renderSearchSuccessView(this.props.searchResult.result);
   }
 
   renderSearchErrorView() {
@@ -86,45 +109,61 @@ class Search extends React.Component {
 
   renderSearchSuccessView(data) {
     NProgress.done();
-    if (data.result.length === 0) {
-      this.renderNoResultView();
-    } else {
-      window.scrollTo(0, 0);
-      const totalNum = this.props.searchResult.result.total;
-      const pageSize = this.props.searchResult.result.pageSize;
-      const totalPage = totalNum % pageSize === 0 ? ~~(totalNum / pageSize) : ~~(totalNum / pageSize) + 1;
-      return (
-        <div>
-          <aside className={style.gAside}>
-            <GroupList data={this.props.groupResult.port || []} title="端口分布" condition="port"/>
-            <GroupList data={this.props.groupResult.country || []} title="国家/地区分布" condition="countryName"/>
-            <GroupList data={this.props.groupResult.org || []} title="企业分布" condition="org"/>
-            <GroupList data={this.props.groupResult.tags || []} title="设备类型分布" condition="tags"/>
-            <GroupList data={this.props.groupResult.isp || []} title="服务供应商分布" condition="isp"/>
-          </aside>
-          <div className={style.gMain}>
-            <p className={style.mSearchTip}>{`搜索结果 ${this.props.searchResult.result.total} 条，耗时: ${this.props.searchResult.result.time} ms`}</p>
-            {data.result.map((item, index) => <ResultItem data={item} key={index}/>)}
-          </div>
-          <div className={style.gBottom}>
-            {this.page <= 1 ? '' : <button className={style.mButton} onClick={(e) => this.handlerPage(~~(this.page) - 1)}>上一页</button>}
-            {this.page >= totalPage ? '' : <button className={style.mButton} onClick={(e) => this.handlerPage(~~(this.page) + 1)}>下一页</button>}
-          </div>
-        </div>
-      )
-    }
+    return data.result.length === 0 ? 
+                this.renderNoResultView() : 
+                this.renderHasResultView(data);
   }
 
-  renderResultView() {
-    if (this.props.searchResult.isLoading) {
-      return this.renderLoadingView();
-    } else {
-      return this.renderOverLoadingView(); 
+  renderSearchResultView() {
+    return this.props.searchResult.isLoading ? 
+                this.renderLoadingView() : 
+                this.renderOverLoadingView(); 
+  }
+
+  renderHasResultView(data) {
+    window.scrollTo(0, 0);
+    const totalNum = data.total;
+    const pageSize = data.pageSize;
+    const totalPage = totalNum % pageSize === 0 ? ~~(totalNum / pageSize) : ~~(totalNum / pageSize) + 1;
+    return (
+      <div>
+        <aside className={style.gAside}>
+          <GroupList data={this.props.groupResult.port || []} title="端口分布" condition="port"/>
+          <GroupList data={this.props.groupResult.country || []} title="国家/地区分布" condition="countryName"/>
+          <GroupList data={this.props.groupResult.org || []} title="企业分布" condition="org"/>
+          <GroupList data={this.props.groupResult.isp || []} title="服务供应商分布" condition="isp"/>
+          <GroupList data={this.props.groupResult.tags || []} title="设备类型分布" condition="tags"/>
+        </aside>
+        <div className={style.gMain}>
+          <p className={style.mSearchTip}>{`搜索结果 ${data.total} 条，耗时: ${data.time} ms`}</p>
+          {data.result.map((item, index) => <ResultItem data={item} key={index}/>)}
+        </div>
+        <div className={style.gBottom}>
+          {this.page <= 1 ? '' : <button className={style.mButton} onClick={(e) => this.handlerPage(~~(this.page) - 1)}>上一页</button>}
+          {this.page >= totalPage ? '' : <button className={style.mButton} onClick={(e) => this.handlerPage(~~(this.page) + 1)}>下一页</button>}
+        </div>
+      </div>
+    )
+  }
+
+  renderMapView() {
+    if (this.props.mapResult.isLoading) {
+      NProgress.start();
     }
+    if (!this.props.mapResult.isLoading) {
+      NProgress.done();
+    }
+    return (
+      <div>
+        <Map data={this.props.mapResult} />
+      </div>
+    )
   }
 
   render() {
-    const view = this.title === '' ? this.renderNotInpuView() : this.renderResultView();
+    const view = this.state.pageType === 0 ? 
+            (this.title === '' ? this.renderNotInputView() : this.renderSearchResultView()) :
+            (this.renderMapView())
     return (
       <div className={style.cSearch}>
         <Header />
@@ -132,7 +171,9 @@ class Search extends React.Component {
             title={this.title}
             inputValueChange={(e) => this.handlerSearchBarValueChange(e)}
             submitClick={() => this.handlerSearchBarSubmitClick()}
-            detail={this.title !== ''}/>
+            detail={this.title !== ''}
+            activePage={this.state.pageType}
+            changePageType={(type) => this.handlerChangePageType(type)}/>
         <main>
           {view}
         </main>
@@ -145,13 +186,15 @@ class Search extends React.Component {
 const mapStateToProps = (state) => ({
   location: state.router.location,
   searchResult: state.search,
-  groupResult: state.group
+  groupResult: state.group,
+  mapResult: state.map
 });
 
 const mapDispatchToProps = (dispatch) => ({
   refreshLocation: function(condition, page, pageSize) {
     dispatch(push({
       location: '/search',
+      pathname: '/search',
       search: `q=${condition}&_=${Date.now()}&page=${page}&pageSize=${pageSize}`
     }));
   },
@@ -167,6 +210,9 @@ const mapDispatchToProps = (dispatch) => ({
     this.dispatchGroup(condition, 'org', 5, -1, 10);
     this.dispatchGroup(condition, 'country', 7, -1, 10);
     this.dispatchGroup(condition, 'isp', 5, -1, 10);
+  },
+  dispatchMap: function(condition) {
+    dispatch(MapAction(condition));
   }
 });
 

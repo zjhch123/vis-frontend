@@ -69,13 +69,14 @@ class Main extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-
+  
 });
 
 const mapDispatchToProps = (dispatch) => ({
     StartSearch: (condition) => {
       condition && dispatch(push({
         pathname: '/search',
+        location: '/search',
         search: `q=${condition}&_=${Date.now()}`
       }));
     }
