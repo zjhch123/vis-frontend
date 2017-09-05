@@ -11,7 +11,7 @@ export const SearchAPI = (condition, page, pageSize, dispatch) => (
 )
 
 export const GroupAPI = (condition, by, limit, order, page, pageSize) => (
-  fetch(`${API_ROOT}group?by=${by}&limit=${limit || 7}&sort=${order || -1}&q=${condition}&page=${page || 1}&pageSize=${pageSize || 10}`)
+  fetch(`${API_ROOT}group2?by=${by}&limit=${limit || 7}&sort=${order || -1}&q=${condition}&page=${page || 1}&pageSize=${pageSize || 10}`)
     .then(res => {
       if (res.status === 200) {
         return res.json();

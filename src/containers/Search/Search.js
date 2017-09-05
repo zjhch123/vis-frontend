@@ -3,12 +3,16 @@ import style from './Search.scss';
 import Header from '../../components/ResultHeader/Header';
 import Footer from '../../components/ResultFooter/Footer';
 import SearchBar from '../../components/ResultHeader/SearchBar';
-import ItemList from '../../components/ItemList/ItemList';
+import GroupList from '../../components/GroupList/GroupList';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import Util from '../../util';
 import {SearchAction, GroupAction} from '../../actions';
 import ResultItem from '../../components/ResultItem/ResultItem';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+
+NProgress.configure({ trickleSpeed: 100 });
 
 const Tip = ({title}) => (
   <div className={style.cSearchTip}>
@@ -24,8 +28,8 @@ class Search extends React.Component {
   }
 
   componentDidMount() {
-    this.dispatchSearch(this.title, this.page, this.pageSize);
-    this.groupCondition(this.title);
+    this.props.dispatchSearch(this.title, this.page, this.pageSize);
+    this.props.dispatchGroups(this.title);
   }
 
   componentWillUpdate(nextProps) {
@@ -39,36 +43,23 @@ class Search extends React.Component {
     this.searchBarInputValue = this.title;
   }
 
-  groupCondition(condition) {
-    this.dispatchGroup(condition, 'port', 5, -1, 10);
-    this.dispatchGroup(condition, 'tags', 5, -1, 10);
-    this.dispatchGroup(condition, 'org', 5, -1, 10);
-    this.dispatchGroup(condition, 'country', 7, -1, 10);
-  }
-
   handlerSearchBarValueChange(e) {
     this.searchBarInputValue = e.target.value;
   }
 
   handlerSearchBarSubmitClick() {
-    this.refreshLocation(this.searchBarInputValue, this.page, this.pageSize);
-    this.dispatchSearch(this.searchBarInputValue, this.page, this.pageSize);
-    this.groupCondition(this.searchBarInputValue);
+    if (this.title === this.searchBarInputValue) {
+      return;
+    }
+    this.props.refreshLocation(this.searchBarInputValue, this.page, this.pageSize);
+    this.props.dispatchSearch(this.searchBarInputValue, this.page, this.pageSize);
+    this.props.dispatchGroups(this.searchBarInputValue);
   }
 
-  refreshLocation(condition, page, pageSize) {
-    this.props.dispatch(push({
-      location: '/search',
-      search: `q=${condition}&_=${Date.now()}&page=${page}&pageSize=${pageSize}`
-    }));
-  }
-
-  dispatchSearch(condition, page, pageSize) {
-    this.props.dispatch(SearchAction(condition, page, pageSize));
-  }
-
-  dispatchGroup(condition, by, limit, order, pageSize) {
-    this.props.dispatch(GroupAction({condition, by, limit, order}));
+  handlerPage(nextPage) {
+    window.scrollTo(0, 0);
+    this.props.refreshLocation(this.searchBarInputValue, nextPage, this.pageSize);
+    this.props.dispatchSearch(this.searchBarInputValue, nextPage, this.pageSize);
   }
 
   renderTip(title) {
@@ -76,6 +67,7 @@ class Search extends React.Component {
   }  
 
   renderLoadingView() {
+    NProgress.start();
     return this.renderTip("正在查询");
   }
 
@@ -89,15 +81,38 @@ class Search extends React.Component {
   }
 
   renderNoResultView() {
-    return this.renderTip(`未找到和${this.title}相关的结果 :（`);
+    return this.renderTip(`未找到和 ${this.title} 相关的结果 :（`);
   }
 
   renderSearchSuccessView(data) {
-    return data.result.length === 0 ? this.renderNoResultView() : (
-      <div>
-        {data.result.map((item, index) => <ResultItem data={item} key={index}/>)}
-      </div>
-    )
+    NProgress.done();
+    if (data.result.length === 0) {
+      this.renderNoResultView();
+    } else {
+      window.scrollTo(0, 0);
+      const totalNum = this.props.searchResult.result.total;
+      const pageSize = this.props.searchResult.result.pageSize;
+      const totalPage = totalNum % pageSize === 0 ? ~~(totalNum / pageSize) : ~~(totalNum / pageSize) + 1;
+      return (
+        <div>
+          <aside className={style.gAside}>
+            <GroupList data={this.props.groupResult.port || []} title="端口分布" condition="port"/>
+            <GroupList data={this.props.groupResult.country || []} title="国家/地区分布" condition="countryName"/>
+            <GroupList data={this.props.groupResult.org || []} title="企业分布" condition="org"/>
+            <GroupList data={this.props.groupResult.tags || []} title="设备类型分布" condition="tags"/>
+            <GroupList data={this.props.groupResult.isp || []} title="服务供应商分布" condition="isp"/>
+          </aside>
+          <div className={style.gMain}>
+            <p className={style.mSearchTip}>{`搜索结果 ${this.props.searchResult.result.total} 条，耗时: ${this.props.searchResult.result.time} ms`}</p>
+            {data.result.map((item, index) => <ResultItem data={item} key={index}/>)}
+          </div>
+          <div className={style.gBottom}>
+            {this.page <= 1 ? '' : <button className={style.mButton} onClick={(e) => this.handlerPage(~~(this.page) - 1)}>上一页</button>}
+            {this.page >= totalPage ? '' : <button className={style.mButton} onClick={(e) => this.handlerPage(~~(this.page) + 1)}>下一页</button>}
+          </div>
+        </div>
+      )
+    }
   }
 
   renderResultView() {
@@ -109,12 +124,7 @@ class Search extends React.Component {
   }
 
   render() {
-    let view;
-    if (this.title === '') {
-      view = this.renderNotInpuView();
-    } else {
-      view = this.renderResultView();
-    }
+    const view = this.title === '' ? this.renderNotInpuView() : this.renderResultView();
     return (
       <div className={style.cSearch}>
         <Header />
@@ -124,27 +134,7 @@ class Search extends React.Component {
             submitClick={() => this.handlerSearchBarSubmitClick()}
             detail={this.title !== ''}/>
         <main>
-          <aside>
-          {
-            this.props.groupResult.port && !this.props.groupResult.port.isLoading &&
-            <ItemList data={this.props.groupResult.port.result.port} title="端口" condition="port"/>
-          }
-          {
-            this.props.groupResult.port && !this.props.groupResult.port.isLoading &&
-            <ItemList data={this.props.groupResult['country'].result['location.country_name_row']} title="国家分布" condition="countryName"/>
-          }
-          {
-            this.props.groupResult.port && !this.props.groupResult.port.isLoading &&
-            <ItemList data={this.props.groupResult.org.result.org_row} title="企业分布" condition="org"/>
-          }
-          {
-            this.props.groupResult.port && !this.props.groupResult.port.isLoading &&
-            <ItemList data={this.props.groupResult.tags.result.tags} title="设备类型分布" condition="tags"/>
-          }
-          </aside>
-          <div>
-            {view}
-          </div>
+          {view}
         </main>
         <Footer />
       </div>
@@ -156,11 +146,29 @@ const mapStateToProps = (state) => ({
   location: state.router.location,
   searchResult: state.search,
   groupResult: state.group
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  dispatch
-})
+  refreshLocation: function(condition, page, pageSize) {
+    dispatch(push({
+      location: '/search',
+      search: `q=${condition}&_=${Date.now()}&page=${page}&pageSize=${pageSize}`
+    }));
+  },
+  dispatchSearch: function(condition, page, pageSize) {
+    dispatch(SearchAction(condition, page, pageSize));
+  },
+  dispatchGroup: function(condition, by, limit, order, pageSize) {
+    dispatch(GroupAction({condition, by, limit, order}));
+  },
+  dispatchGroups: function(condition) {
+    this.dispatchGroup(condition, 'port', 5, -1, 10);
+    this.dispatchGroup(condition, 'tags', 5, -1, 10);
+    this.dispatchGroup(condition, 'org', 5, -1, 10);
+    this.dispatchGroup(condition, 'country', 7, -1, 10);
+    this.dispatchGroup(condition, 'isp', 5, -1, 10);
+  }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
 

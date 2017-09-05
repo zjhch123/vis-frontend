@@ -1,25 +1,11 @@
-const single = (state = {
-  isLoading: false,
-  result: {}
-}, action) => {
+const single = (state = [], action) => {
   switch (action.type) {
     case 'GROUP_START': 
-      return {
-        ...state,
-        isLoading: true
-      }
+      return state
     case 'GROUP_SUCCESS':
-      return {
-        ...state,
-        isLoading: false,
-        result: action.payload.aggregations || []
-      }
+      return action.payload.buckets || []
     case 'GROUP_ERROR': 
-      return {
-        ...state,
-        isLoading: false,
-        result: -1
-      }
+      return []
     default: 
       return state
   }
@@ -31,8 +17,10 @@ const group = (state = {}, action) => {
     case 'GROUP_ERROR':
     case 'GROUP_SUCCESS':
       const by = action.by;
-      state[by] = single(state[by] || {}, action);
-      return state;
+      return {
+        ...state,
+        [by]: single(state[by] || [], action)
+      };
     default:
       return state;
   }
