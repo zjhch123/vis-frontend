@@ -1,17 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
-import Header from '../../components/ResultHeader/Header';
-import Footer from '../../components/ResultFooter/Footer';
-import SearchBar from '../../components/ResultHeader/SearchBar';
-import PortBox from '../../components/HostPort/PortBox';
-import PortDetail from '../../components/HostPort/PortDetail';
-import Split from '../../components/Split/Split';
-import Map from '../../components/Map/HostMap/Map';
-import Util from '../../util';
+import {HostAction} from '../../../actions';
+
+import PortBox from '../../../components/HostPort/PortBox';
+import PortDetail from '../../../components/HostPort/PortDetail';
+import Split from '../../../components/Split/Split';
+import Map from '../../../components/Map/HostMap/Map';
+import Util from '../../../util';
+import HostItemList from '../../../components/HostItem/ItemList';
+
 import style from './Host.scss';
-import HostItemList from '../../components/HostItem/ItemList';
-import {HostAction} from '../../actions';
+
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
@@ -58,7 +57,7 @@ class Host extends React.Component {
       }
       view = (
         <div>
-          <Map location={location} />
+          <Map location={location} size={6}/>
           <div className={style.gContainer}>
             <div className={style.gLeft}>
               <p>
@@ -87,18 +86,10 @@ class Host extends React.Component {
       )
     }
     return (
-      <div className={style.cHost}>
-        <Header />
-        <SearchBar 
-            title={this.title}
-            inputValueChange={(e) => this.handlerSearchBarValueChange(e)}
-            submitClick={() => this.handlerSearchBarSubmitClick()}/>
-        <main>
-          {view}
-        </main>
-        <Footer />
+      <div>
+        {view}
       </div>
-    )
+    );
   }
 }
 
@@ -108,13 +99,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  refreshLocation: function(condition, page, pageSize) {
-    dispatch(push({
-      location: '/search',
-      pathname: '/search',
-      search: `q=${condition}&_=${Date.now()}&page=${page}&pageSize=${pageSize}`
-    }));
-  },
   dispatchHost: function(condition) {
     dispatch(HostAction(condition));
   }

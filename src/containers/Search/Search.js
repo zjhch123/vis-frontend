@@ -3,9 +3,9 @@ import style from './Search.scss';
 import Header from '../../components/ResultHeader/Header';
 import Footer from '../../components/ResultFooter/Footer';
 import SearchBar from '../../components/ResultHeader/SearchBar';
-import Result from './Result/';
-import Host from './Host/';
-import Map from './Map/';
+import Result from './Result/Result';
+import Host from './Host/Host';
+import Map from './Map/Map';
 import {Switch} from 'react-router-dom';
 import {Route} from 'react-router';
 import {connect} from 'react-redux';
@@ -35,10 +35,7 @@ class Search extends React.Component {
   }
 
   handlerSearchBarSubmitClick() {
-    if (this.title === this.searchBarInputValue) {
-      return;
-    }
-    this.props.refreshLocation(this.searchBarInputValue, 1, this.pageSize);
+    this.props.refreshLocation( this.searchBarInputValue, 1, this.pageSize, '/search');
   }
 
   renderLayout() {
@@ -60,9 +57,9 @@ class Search extends React.Component {
       <div className={style.cSearch}>
         <Route component={this.renderLayout.bind(this)} />
         <Switch>
-          <Route exact path='/search' render={() => <Result refreshLocation={this.props.refreshLocation.bind(this)}/>}/>
-          <Route path='/search/map' render={() => <Map refreshLocation={this.props.refreshLocation.bind(this)}/>}/>
-          <Route path='/search/host' render={() => <Host refreshLocation={this.props.refreshLocation.bind(this)}/>}/>
+          <Route exact path='/search' render={() => <Result title={this.title} page={this.page} pageSize={this.pageSize} refreshLocation={this.props.refreshLocation.bind(this)}/>}/>
+          <Route path='/search/map' render={() => <Map title={this.title} refreshLocation={this.props.refreshLocation.bind(this)}/>}/>
+          <Route path='/search/host' render={() => <Host title={this.title} refreshLocation={this.props.refreshLocation.bind(this)}/>}/>
         </Switch>
         <Footer />
       </div>
@@ -74,11 +71,10 @@ const mapStateToProps = (state) => ({
   location: state.router.location
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  refreshLocation: function(condition, page, pageSize) {
+const mapDispatchToProps = (dispatch, props) => ({
+  refreshLocation: function(condition, page, pageSize, pathname = props.location.pathname) {
     dispatch(push({
-      location: '/search',
-      pathname: '/search',
+      pathname: pathname,
       search: `?q=${condition}&_=${Date.now()}&page=${page}&pageSize=${pageSize}`
     }));
   }

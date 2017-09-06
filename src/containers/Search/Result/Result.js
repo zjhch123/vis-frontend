@@ -7,7 +7,6 @@ import {SearchAction, GroupAction} from '../../../actions';
 
 import ResultItem from '../../../components/ResultItem/ResultItem';
 import GroupList from '../../../components/GroupList/GroupList';
-import Util from '../../../util';
 
 NProgress.configure({ trickleSpeed: 100 });
 
@@ -32,7 +31,7 @@ class Result extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
-    const nextTitle = Util.getUrlParam(nextProps.location.search, 'q');
+    const nextTitle = nextProps.title;
     if (nextTitle !== this.title) {
       this.props.dispatchSearch(nextTitle, 1, this.pageSize);
       this.props.dispatchGroups(nextTitle);
@@ -41,9 +40,9 @@ class Result extends React.Component {
   }
 
   mapQueryCondition(props) {
-    this.title = Util.getUrlParam(props.location.search, 'q') || '';
-    this.page = Util.getUrlParam(props.location.search, 'page') || 1;
-    this.pageSize = Util.getUrlParam(props.location.search, 'pageSize') || 10;
+    this.title = props.title;
+    this.page = props.page;
+    this.pageSize = props.pageSize;
   }
 
   renderTip(title) {
@@ -66,6 +65,7 @@ class Result extends React.Component {
   }
 
   renderSearchErrorView() {
+    NProgress.done();
     return this.renderTip("服务器开小差了，请重新查询 :（");
   }
 
@@ -124,7 +124,6 @@ class Result extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  location: state.router.location,
   searchResult: state.search,
   groupResult: state.group,
 });

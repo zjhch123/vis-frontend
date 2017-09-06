@@ -17,8 +17,7 @@ export default ({data, match}) => (
         <p className={style.uOrg}>{data.org}</p>
       </div>
       <div className={style.mRight}>
-        <div className={style.uDetail} dangerouslySetInnerHTML={{__html: Util.fuckXSS(data.data).replace(/\n+/g, '<br/>')}}>
-        </div>
+        <div className={style.uDetail} dangerouslySetInnerHTML={{__html: Util.fuckXSS(data.data).replace(/\n+/g, '<br/>')}}></div>
       </div>
     </div>
     <Split />

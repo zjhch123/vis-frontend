@@ -12,9 +12,9 @@ export default class Map extends React.Component {
       viewport: {
         width: 500,
         height: 250,
-        zoom: 7,
+        zoom: 14,
         minZoom: 2.5,
-        maxZoom: 15,
+        maxZoom: 17,
         bearing: 0,
         longitude: props.location.longitude,
         latitude: props.location.latitude,
@@ -52,7 +52,7 @@ export default class Map extends React.Component {
             mapboxApiAccessToken={MAPBOX_TOKEN}
             mapStyle="mapbox://styles/mapbox/dark-v9"
         >
-        <PointOverlay {...this.state.viewport} locations={[this.props.location, {longitude: 120, latitude:30}]} size={this.props.size || 10}/>
+        <PointOverlay viewport={this.state.viewport} locations={[this.props.location]} size={this.props.size || 60}/>
       </MapGL>
     )
   }

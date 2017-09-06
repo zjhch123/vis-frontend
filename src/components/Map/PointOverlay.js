@@ -1,35 +1,23 @@
-import {SVGOverlay} from 'react-map-gl'
+import DeckGL, {ScatterplotLayer} from 'deck.gl';
 import React from 'react';
-import PropTypes from 'prop-types';
-import r from 'r-dom';
-import assign from 'object-assign';
 
-export default class PointOverlay extends React.Component {
-
-  render() {
-    const size = this.props.size;
-    return r(SVGOverlay, assign({}, this.props, {
-      redraw: function redraw(opt) {
-        return r.g(this.props.locations.map(function map(location) {
-          var pixel = opt.project([location.longitude, location.latitude]);
-          return r.circle({
-            cx: pixel[0],
-            cy: pixel[1],
-            r: size,
-            style: {
-              fill: '#00A9FF',
-              pointerEvents: 'all',
-              cursor: 'pointer'
-            }
-          });
-        }));
-      }.bind(this)
-    }))
+export default ({locations, viewport, size}) =>  {
+  let data = [];
+  for (let i = 0; i < locations.length; i += 1) {
+    let temp = {
+      position: [locations[i].longitude, locations[i].latitude],
+      radius: 10,
+      color: [0, 170, 255]
+    };
+    data.push(temp);
   }
+  console.log(data)
+  const layer = new ScatterplotLayer({
+    id: 'scatterplot-layer',
+    data,
+    radiusScale: size,
+    radiusMinPixels: 1,
+    outline: false
+  });
+  return (<DeckGL {...viewport} layers={[layer]} />);
 }
-
-PointOverlay.PropTypes = {
-  locations: PropTypes.array.isRequired,
-}
-
-
