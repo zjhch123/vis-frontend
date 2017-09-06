@@ -13,8 +13,8 @@ const routes = ({history}) => (
     <Switch>
       <Route path="/" exact component={Main} />
       <Route path="/index" component={Main} />
-      <Route path="/search" component={Search} />
-      <Route path="/host" component={Host} />
+      <Route path="/search/" exact component={Search}/>
+      <Route path="/search/host" component={Host}/>
     </Switch>
   </ConnectedRouter>
 )

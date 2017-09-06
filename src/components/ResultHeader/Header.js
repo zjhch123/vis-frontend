@@ -7,7 +7,7 @@ export default ({className}) => (
   <header className={`${style.cHeader} ${className}`}>
     <div className={style.gLeft}>
       <NavLink exact to={URL.Index} className={style.uLinkItem} activeClassName={style.active}>首页</NavLink>
-      <NavLink exact to={URL.ShiChuang} className={style.uLinkItem} activeClassName={style.active}>势窗</NavLink>
+      <NavLink to={URL.ShiChuang} className={style.uLinkItem} activeClassName={style.active}>势窗</NavLink>
       <a href={URL.ShiJie} className={style.uLinkItem}>势界</a>
       <NavLink exact to={URL.OpenAPI} className={style.uLinkItem} activeClassName={style.active}>开放API</NavLink>
       <a href={URL.Help} className={style.uLinkItem}>帮助</a>

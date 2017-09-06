@@ -1,5 +1,5 @@
 import MapGL from 'react-map-gl';
-import PointOverlay from './point-overlay.js';
+import PointOverlay from '../PointOverlay.js';
 import React from 'react';
 
 const MAPBOX_TOKEN = "pk.eyJ1IjoiempoY2gxMjMiLCJhIjoiY2l1cDd4cWduMDAzMDJvbDhrY2Zta3NkNCJ9.3FmRDWqp0TXkgdDIWnM-vw"; // eslint-disable-line
@@ -52,7 +52,7 @@ export default class Map extends React.Component {
             mapboxApiAccessToken={MAPBOX_TOKEN}
             mapStyle="mapbox://styles/mapbox/dark-v9"
         >
-        <PointOverlay {...this.state.viewport} locations={[this.props.location]} />
+        <PointOverlay {...this.state.viewport} locations={[this.props.location, {longitude: 120, latitude:30}]} size={this.props.size || 10}/>
       </MapGL>
     )
   }

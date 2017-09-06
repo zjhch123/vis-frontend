@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import Util from '../../util';
 import {SearchAction, GroupAction, MapAction} from '../../actions';
-import Map from '../../components/SearchMap/Map';
+import Map from '../../components/Map/SearchMap/Map';
 import ResultItem from '../../components/ResultItem/ResultItem';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
@@ -155,7 +155,8 @@ class Search extends React.Component {
     }
     return (
       <div>
-        <Map data={this.props.mapResult} />
+        <Map data={this.props.mapResult} 
+             size={4} />
       </div>
     )
   }

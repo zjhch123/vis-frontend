@@ -8,7 +8,7 @@ import Util from '../../util';
 export default ({data}) => (
   <div className={style.cResultItem}>
     <div className={style.mContent}>
-      <p><Link className={style.uIp} to={`/host?q=ip:${data.ip_str}`}>{data.ip_str}</Link></p>
+      <p><Link className={style.uIp} to={`/search/host?q=ip:${data.ip_str}&_=${new Date().getTime()}`}>{data.ip_str}</Link></p>
       <div className={style.mLeft}>
         <div className={style.uTag}>
           <Tag type="red" title={data.module}/><Tag type="#6666CC" title={data.tags}/>

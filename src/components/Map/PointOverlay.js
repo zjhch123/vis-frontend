@@ -7,6 +7,7 @@ import assign from 'object-assign';
 export default class PointOverlay extends React.Component {
 
   render() {
+    const size = this.props.size;
     return r(SVGOverlay, assign({}, this.props, {
       redraw: function redraw(opt) {
         return r.g(this.props.locations.map(function map(location) {
@@ -14,9 +15,9 @@ export default class PointOverlay extends React.Component {
           return r.circle({
             cx: pixel[0],
             cy: pixel[1],
-            r: 10,
+            r: size,
             style: {
-              fill: 'rgb(231, 76, 60)',
+              fill: '#00A9FF',
               pointerEvents: 'all',
               cursor: 'pointer'
             }

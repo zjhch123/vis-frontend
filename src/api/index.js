@@ -33,7 +33,10 @@ export const MapAPI = (condition) => (
       for(let i = 0; i < result.length; i += 3) {
         let lat = result[i];
         let lng = result[i + 1];
-        data.push([Number(lng), Number(lat)]);
+        data.push({
+          longitude: Number(lng), 
+          latitude: Number(lat)
+        });
       }
       return data;
     })
