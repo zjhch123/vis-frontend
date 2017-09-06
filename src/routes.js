@@ -5,7 +5,8 @@ import {
 } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux'
 import Main from './containers/Main/Main';
-import Search from './containers/Search/Search'
+import Search from './containers/Search/Search';
+import NoMatch from './containers/NoMatch/NoMatch'
 
 const routes = ({history}) => (
   <ConnectedRouter history={history}>
@@ -13,6 +14,7 @@ const routes = ({history}) => (
       <Route path="/" exact component={Main} />
       <Route path="/index" component={Main} />
       <Route path="/search" component={Search} />
+      <Route component={NoMatch}/>
     </Switch>
   </ConnectedRouter>
 )

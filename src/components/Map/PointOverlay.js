@@ -11,7 +11,6 @@ export default ({locations, viewport, size}) =>  {
     };
     data.push(temp);
   }
-  console.log(data)
   const layer = new ScatterplotLayer({
     id: 'scatterplot-layer',
     data,
