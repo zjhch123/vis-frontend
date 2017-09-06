@@ -5,7 +5,7 @@ import Tag from './Tag.js';
 import Split from '../Split/Split';
 import Util from '../../util';
 
-export default ({data}) => (
+export default ({data, match}) => (
   <div className={style.cResultItem}>
     <div className={style.mContent}>
       <p><Link className={style.uIp} to={`/search/host?q=ip:${data.ip_str}&_=${new Date().getTime()}`}>{data.ip_str}</Link></p>

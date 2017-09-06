@@ -10,7 +10,6 @@ export default (state = {
         result: []
       }
     case 'MAP_SUCCESS':
-    
       return {
         ...state,
         isLoading: false,

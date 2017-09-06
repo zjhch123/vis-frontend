@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import URL from '../../link';
 
 export default ({className}) => (
-  <header className={`${style.cHeader} ${className}`}>
+  <header className={`${style.cHeader} ${className || ''}`}>
     <div className={style.gLeft}>
       <NavLink exact to={URL.Index} className={style.uLinkItem} activeClassName={style.active}>首页</NavLink>
       <NavLink to={URL.ShiChuang} className={style.uLinkItem} activeClassName={style.active}>势窗</NavLink>
