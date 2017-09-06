@@ -7,7 +7,7 @@ import SearchBar from '../../components/ResultHeader/SearchBar';
 import PortBox from '../../components/HostPort/PortBox';
 import PortDetail from '../../components/HostPort/PortDetail';
 import Split from '../../components/Split/Split';
-import Map from '../../components/HostMap/Map';
+import Map from '../../components/Map/HostMap/Map';
 import Util from '../../util';
 import style from './Host.scss';
 import HostItemList from '../../components/HostItem/ItemList';
