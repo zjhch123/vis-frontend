@@ -64,7 +64,7 @@
       cursor: pointer;
     }
   }
-}
-:global(.active) {
-  color: white !important;
+  .active {
+    color: white !important;
+  }
 }

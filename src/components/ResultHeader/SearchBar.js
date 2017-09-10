@@ -24,12 +24,12 @@ export default ({title, detail, inputValueChange, submitClick, location}) => (
     { 
       detail &&
         <div className={style.mRow2}>
-          <NavLink exact className={style.uTab} activeClassName="active" to={{
+          <NavLink exact className={style.uTab} activeClassName={style.active} to={{
             pathname: '/search',
             search: location.search,
             hash: location.hash
           }}>搜索结果</NavLink>
-          <NavLink className={style.uTab} activeClassName="active" to={{
+          <NavLink className={style.uTab} activeClassName={style.active} to={{
             pathname: '/search/map',
             search: location.search,
             hash: location.hash

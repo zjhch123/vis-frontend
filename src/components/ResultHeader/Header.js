@@ -13,8 +13,8 @@ export default ({className}) => (
       }} className={style.uLinkItem} activeClassName={style.active}>势窗</NavLink>
       <a href={URL.ShiJie} className={style.uLinkItem}>势界</a>
       <NavLink exact to={URL.OpenAPI} className={style.uLinkItem} activeClassName={style.active}>开放API</NavLink>
-      <a href={URL.Help} className={style.uLinkItem}>帮助</a>
-      <NavLink exact to={URL.About} className={style.uLinkItem} activeClassName={style.active}>关于我们</NavLink>
+      <Link to={URL.Help} className={style.uLinkItem}>帮助</Link>
+      <a exact href={URL.About} className={style.uLinkItem} activeClassName={style.active}>关于我们</a>
     </div>
     <div className={style.gRight}>
       <Link to={URL.Register} className={style.uLinkItem}>注册</Link>
