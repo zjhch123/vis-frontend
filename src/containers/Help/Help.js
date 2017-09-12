@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './Help.scss';
 import Header from '../../components/IndexHeader/Header';
-import Footer from '../../components/IndexFooter/Footer';
+import Footer from '../../components/ResultFooter/Footer';
 
 export default () => (
 <div>

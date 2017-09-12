@@ -4,7 +4,7 @@ export default {
   ShiChuang: '/search',
   OpenAPI: '/open',
   Help: '/help',
-  About: 'http://139.129.132.196/ics/about.html',
+  About: '/about',
   Register: '/register',
   Login: '/login',
   Module: '/module',

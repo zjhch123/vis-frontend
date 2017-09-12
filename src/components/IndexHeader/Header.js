@@ -16,7 +16,7 @@ export default class Header extends React.Component {
           <a href={URL.ShiJie} className={style.uLinkItem}>势界</a>
           <NavLink exact to={URL.OpenAPI} className={style.uLinkItem} activeClassName={style.active}>开放API</NavLink>
           <NavLink exact to={URL.Help} className={style.uLinkItem} activeClassName={style.active}>帮助</NavLink>
-          <a exact href={URL.About} className={style.uLinkItem} activeClassName={style.active}>关于我们</a>
+          <NavLink exact to={URL.About} className={style.uLinkItem} activeClassName={style.active}>关于我们</NavLink>
         </div>
       </header>
     )
