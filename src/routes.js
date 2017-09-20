@@ -8,6 +8,7 @@ import Main from './containers/Main/Main';
 import Search from './containers/Search/Search';
 import Help from './containers/Help/Help';
 import About from './containers/About/About';
+import Situation from './containers/Situation/Situation';
 import NoMatch from './containers/NoMatch/NoMatch';
 
 const routes = ({history}) => (
@@ -18,6 +19,7 @@ const routes = ({history}) => (
       <Route path="/search" component={Search} />
       <Route path="/help" component={Help} />
       <Route path="/about" component={About} />
+      <Route path="/situation" component={Situation} />
       <Route component={NoMatch}/>
     </Switch>
   </ConnectedRouter>
