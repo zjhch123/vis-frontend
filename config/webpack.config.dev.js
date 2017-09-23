@@ -303,5 +303,8 @@ module.exports = {
   // cumbersome.
   performance: {
     hints: false,
+  },
+  externals: {
+    'BMap': 'BMap'
   }
 };

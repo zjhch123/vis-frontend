@@ -3,6 +3,8 @@ import Header from '../../components/IndexHeader/Header';
 import SVGLogo from '../../components/Logo/SVGLogo';
 import Button from '../../components/Button/Button';
 import Footer from '../../components/IndexFooter/Footer';
+import { Link } from 'react-router-dom';
+import URL from '../../link';
 import style from './Main.scss';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
@@ -55,7 +57,7 @@ class Main extends React.Component {
             </div>
             <div className={style.mBtnGroup}>
               <Button title="鉴势一下" className={style.uBtn} type="blue" onClick={() => this.props.StartSearch(this.queryCondition)}/>
-              <Button title="高级搜索" className={style.uBtn} type="gray" onClick={() => console.log(1)}/>
+              <Link to={URL.HighSearch} className={`${style.uBtn} ${style.uSearch}`}>高级搜索</Link>
             </div>
             <div className={style.mTip}>
               <p className={style.uTip}>提示:按下Shift+/显示帮助</p>

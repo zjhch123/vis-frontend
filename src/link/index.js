@@ -3,6 +3,7 @@ export default {
   ShiJie: 'http://139.129.132.196/ics/vis.html',
   ShiChuang: '/search',
   OpenAPI: '/open',
+  HighSearch: '/find',
   Help: '/help',
   About: '/about',
   Register: '/register',
