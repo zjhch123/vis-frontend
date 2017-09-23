@@ -382,4 +382,7 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
   },
+  externals: {
+    'BMap': 'BMap'
+  }
 };
