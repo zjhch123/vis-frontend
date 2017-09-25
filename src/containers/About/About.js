@@ -15,7 +15,7 @@ export default class About extends React.Component {
         <div className={style.cAbout}>
           <Header />
           <div className={style.mLogo}>
-            <img alt="img" className={style.uLogo} src={require("../../resource/image/logo.png")}/>
+            <img alt="img" className={style.uLogo} src={require("../../resource/image/logo_banner.png")}/>
             <div>
               <span>关于我们</span>
               <span>工控设备在线搜索与可视化平台</span>

@@ -1153,6 +1153,7 @@ export default class Situation extends React.Component {
         charts.setOption(option);
         this.bmap = window.bmap = charts.getModel().getComponent('bmap').getBMap();
         this.bmap.setMinZoom(5);
+        this.getBoundary('中国');
     }
 
     componentDidMount() {
@@ -1189,8 +1190,8 @@ export default class Situation extends React.Component {
     }
 
     render() {
-        return ( 
-        <div style={{height: this.props.height,width: this.props.width}}>
+        return (
+        <div className={style.cMap}>
             <div id="charts" className={style.mCharts}></div> 
         </div>)
     }

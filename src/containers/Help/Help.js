@@ -13,7 +13,7 @@ export default class Help extends React.Component {
         <Header />
         <div className={style.cHelp}>
           <div className={style.mLogo}>
-            <img className={style.uLogo} alt="logo" src={require("../../resource/image/logo.png")}/>
+            <img className={style.uLogo} alt="logo" src={require("../../resource/image/logo_banner.png")}/>
             <div className={style.uContent}>
               <p className={style.title}>帮助</p>
               <p className={style.subtitle}>工控设备在线搜索与可视化平台</p>

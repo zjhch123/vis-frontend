@@ -1,0 +1,36 @@
+.c-situation {
+  display: flex;
+  min-width: 1090px;
+  min-height: 700px;
+  background: rgb(27,27,27);
+  * {
+    box-sizing: border-box;
+  }
+}
+.g-center, .g-left, .g-right {
+  display: flex;
+  flex-direction: column;
+}
+.g-center {
+  flex: 1;
+  .m-map {
+    flex: 1 1 60%;
+    display: flex;
+    flex-direction: column;
+    .u-title {
+      flex: 0;
+    }
+    .u-map {
+      flex: 1;
+    }
+  }
+  .m-follow, .m-situation {
+    flex: 1 1 20%;
+  }
+}
+.g-left, .g-right {
+  flex: 0 0 330px;
+  .m-block {
+    flex: 1;
+  }
+}
