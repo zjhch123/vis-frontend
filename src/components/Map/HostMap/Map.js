@@ -23,17 +23,12 @@ export default class Map extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this._resize.bind(this));
     this._resize();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this._resize.bind(this));
   }
 
   _resize() {
     this._onViewportChange({
-      width: document.documentElement.clientWidth,
+      width: document.documentElement.offsetWidth,
       height: 250
     });
   }

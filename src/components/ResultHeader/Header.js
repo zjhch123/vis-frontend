@@ -14,7 +14,7 @@ export default ({className}) => (
       <a href={URL.ShiJie} className={style.uLinkItem}>势界</a>
       <NavLink exact to={URL.OpenAPI} className={style.uLinkItem} activeClassName={style.active}>开放API</NavLink>
       <Link to={URL.Help} className={style.uLinkItem}>帮助</Link>
-      <Link to={URL.About} className={style.uLinkItem} activeClassName={style.active}>关于我们</Link>
+      <Link to={URL.About} className={style.uLinkItem}>关于我们</Link>
     </div>
     <div className={style.gRight}>
       <Link to={URL.Register} className={style.uLinkItem}>注册</Link>

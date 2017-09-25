@@ -19,7 +19,12 @@ class Search extends React.Component {
     this.mapQueryCondition(props);
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   componentWillUpdate(nextProps) {
+    window.scrollTo(0, 0);
     this.mapQueryCondition(nextProps);
   }
 

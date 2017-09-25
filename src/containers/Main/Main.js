@@ -20,6 +20,7 @@ class Main extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.timeInterval = setInterval(() => {
       let inputValue = this.scrollInput[this.scrollIndex];
       this.refs.searchInput.setAttribute('placeholder', inputValue);

@@ -14,7 +14,12 @@ class Search extends React.Component {
     this.mapQueryCondition(props);
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   componentWillUpdate(nextProps) {
+    window.scrollTo(0, 0);
     this.mapQueryCondition(nextProps);
   }
 
@@ -42,7 +47,7 @@ class Search extends React.Component {
             title={this.title}
             inputValueChange={(e) => this.handlerSearchBarValueChange(e)}
             submitClick={() => this.handlerSearchBarSubmitClick()}
-            detail={this.title !== ''}/>
+            detail={false}/>
         <div className={style.cTip}>
           <h1>页面正在构建中...</h1>
         </div>

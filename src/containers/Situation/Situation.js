@@ -5,6 +5,7 @@ import ChinaMap from '../../components/Situation/ChinaMap/Map';
 export default class Situation extends React.Component {
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     setTimeout(function() {
       this.refs.bmap.getBoundary('浙江');
     }.bind(this), 5000);

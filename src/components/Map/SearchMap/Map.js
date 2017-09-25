@@ -25,15 +25,10 @@ export default class Map extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this._resize.bind(this));
     this._resize();
     this.setState({
       data: this.props.data.result
     });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this._resize.bind(this));
   }
 
   componentWillReceiveProps(nextProps) {

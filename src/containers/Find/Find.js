@@ -9,6 +9,10 @@ import URL from '../../link';
 
 class Find extends React.Component {
 
+  componentDidMount() {
+      window.scrollTo(0, 0);
+  }
+
   handlerKeyUp(e) {
     if (e.keyCode === 13) {
       this.handlerSearchClick();
@@ -89,7 +93,7 @@ class Find extends React.Component {
         <hr/>
         <section className={style["button"]}>
             <div className={style["button-group"]}>
-                <a href="javascript:;" onClick={() => this.handlerSearchClick()} className={`${style["btn"]} ${style["u-search"]}`}>搜索</a>
+                <a onClick={() => this.handlerSearchClick()} className={`${style["btn"]} ${style["u-search"]}`}>搜索</a>
             </div>
             <div className={style["button-group"]}>
                 <Link to={URL.Index} className={`${style["btn"]} ${style["u-back"]}`}>返回首页</Link>
