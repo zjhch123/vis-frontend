@@ -1,0 +1,33 @@
+.c-province {
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+.m-table {
+  margin: auto;
+  width: 90%;
+  overflow: scroll;
+  .u-thead {
+    border-bottom: 1px solid white;
+  }
+  .u-tbody {
+    text-align: center;
+    tr {
+      border-top: 1px solid white;
+      &:hover {
+        background: #292b38;
+      }
+    }
+  }
+  .id {
+    width: 10%;
+  }
+  .province {
+    width: 60%;
+  }
+  .count {
+    width: 30%;
+  }
+}

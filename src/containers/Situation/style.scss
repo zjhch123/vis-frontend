@@ -10,19 +10,14 @@
 .g-center, .g-left, .g-right {
   display: flex;
   flex-direction: column;
+  .m-block {
+    flex: 1;
+  }
 }
 .g-center {
   flex: 1;
   .m-map {
     flex: 1 1 60%;
-    display: flex;
-    flex-direction: column;
-    .u-title {
-      flex: 0;
-    }
-    .u-map {
-      flex: 1;
-    }
   }
   .m-follow, .m-situation {
     flex: 1 1 20%;
@@ -30,7 +25,7 @@
 }
 .g-left, .g-right {
   flex: 0 0 330px;
-  .m-block {
-    flex: 1;
-  }
+}
+.m-province {
+  overflow: auto;
 }

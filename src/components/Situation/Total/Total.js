@@ -2,58 +2,6 @@ import React from 'react';
 import style from './Total.scss';
 
 export default class Total extends React.Component {
-  
-  componentDidMount() {
-    // const option = {
-    //   angleAxis: {
-    //   },
-    //   radiusAxis: {
-    //     type: 'category',
-    //     data: [
-    //         {
-    //             value: '工控设备',
-    //             textStyle: {color: 'white'}
-    //         }, 
-    //         {
-    //             value: '蜜罐',
-    //             textStyle: {color: 'white'}
-    //         }, 
-    //         {
-    //             value: '摄像头',
-    //             textStyle: {color: 'white'}
-    //         }],
-    //     z: 10
-    //   },
-    //   polar: {
-    //   },
-    //   series: [{
-    //       type: 'bar',
-    //       data: [3, 0, 0],
-    //       coordinateSystem: 'polar',
-    //       name: '蜜罐',
-    //       stack: 'a'
-    //   }, {
-    //       type: 'bar',
-    //       data: [0, 16, 0],
-    //       coordinateSystem: 'polar',
-    //       name: '摄像头',
-    //       stack: 'a'
-    //   }, {
-    //       type: 'bar',
-    //       data: [0, 0, 1341],
-    //       coordinateSystem: 'polar',
-    //       name: '工控设备',
-    //       stack: 'a'
-    //   }],
-    //   legend: {
-    //       show: true,
-    //       data: ['工控设备', '摄像头', '蜜罐']
-    //   }
-    // };
-    // const charts = Echarts.init(this.refs['total-charts']);
-    // charts.setOption(option);
-  }
-
   render() {
     return (
       <div className={`${style.cTotal} ${this.props.className || ''}`}>

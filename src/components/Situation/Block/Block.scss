@@ -1,6 +1,7 @@
 .c-block {
   border: 1px solid white;
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   width: 100%;
   position: relative;
 }
@@ -8,8 +9,12 @@
   display: inline-block;
 }
 .u-title {
+  flex: 0;
   font-size: 16px;
   line-height: 1.41;
   text-align: center;
   color: white;
+}
+.c-container {
+  flex: 1;
 }

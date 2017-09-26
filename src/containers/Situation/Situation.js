@@ -5,6 +5,8 @@ import Total from '../../components/Situation/Total/Total';
 import Score from '../../components/Situation/Score/Score';
 import System from '../../components/Situation/System/System';
 import Follow from '../../components/Situation/Follow/Follow';
+import Trend from '../../components/Situation/Trend/Trend';
+import Province from '../../components/Situation/Province/Province';
 import style from './style.scss';
 
 export default class Situation extends React.Component {
@@ -22,35 +24,49 @@ export default class Situation extends React.Component {
         <Block.Column className={style.gLeft}>
           <Block className={style.mBlock}>
             <Block.Title>总数、分布</Block.Title>
-            <Total />
+            <Block.Container>
+              <Total />
+            </Block.Container>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>实时安全评分</Block.Title>
-            <Score />
+            <Block.Container>
+              <Score />
+            </Block.Container>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>系统运行情况</Block.Title>
-            <System />
+            <Block.Container>
+              <System />
+            </Block.Container>
           </Block>
         </Block.Column>
         <Block.Column className={style.gCenter}>
-          <Block className={style.mMap}>
-            <Block.Title className={style.uTitle}>态势地图</Block.Title>
-            <Block.Container className={style.uMap}>
+          <Block className={`${style.mBlock} ${style.mMap}`}>
+            <Block.Title>态势地图</Block.Title>
+            <Block.Container>
               <ChinaMap ref="bmap"/>
             </Block.Container>
           </Block>
-          <Block className={style.mFollow}>
+          <Block className={`${style.mBlock} ${style.mFollow}`}>
             <Block.Title>态势跟踪</Block.Title>
-            <Follow />
+            <Block.Container>
+              <Follow />
+            </Block.Container>
           </Block>
-          <Block className={style.mSituation}>
-            <Block.Title>应急响应中心</Block.Title>
+          <Block className={`${style.mBlock} ${style.mSituation}`}>
+            <Block.Title>漏洞趋势分布</Block.Title>
+            <Block.Container>
+              <Trend />
+            </Block.Container>
           </Block>
         </Block.Column>
         <Block.Column className={style.gRight}>
           <Block className={style.mBlock}>
             <Block.Title>行政区块</Block.Title>
+            <Block.Container className={style.mProvince}>
+              <Province />
+            </Block.Container>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>端口分布</Block.Title>

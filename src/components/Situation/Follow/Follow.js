@@ -27,7 +27,7 @@ export default class Score extends React.Component {
         offlineData.ics.push(Math.round((Math.random() - 0.5) * 10 + offlineData.ics[i - 1]));
         offlineData.camera.push(Math.round((Math.random() - 0.45) * 4 + offlineData.camera[i - 1]));
     }
-    this.optionOnline = {
+    this.baseOption = {
         tooltip: {
             trigger: 'axis',
             position: function (pt) {
@@ -45,9 +45,8 @@ export default class Score extends React.Component {
             type: 'category',
             boundaryGap: false,
             data: onlineData.date,
-            axisLabel: {
-              color: 'white'
-            }
+            axisLine: {lineStyle: {color: 'white'}},
+            axisLabel: {color: 'white'}
         },
         yAxis: [
           {
@@ -56,10 +55,11 @@ export default class Score extends React.Component {
             min: function(value) {
                 return value.min - 300 > 0 ? value.min - 300 : 0;
             },
+            axisLine: {lineStyle: {color: 'white'}},
             axisLabel: {
               color: 'white'
             },
-            splitNumber: 5
+            splitLine: {show: false}
           },
           {
             type: 'value',
@@ -67,10 +67,11 @@ export default class Score extends React.Component {
             min: function(value) {
                 return value.min - 30 > 0 ? value.min - 30 : 0;
             },
+            axisLine: {lineStyle: {color: 'white'}},
             axisLabel: {
               color: 'white'
             },
-            splitNumber: 5
+            splitLine: {show: false}
           }
         ],
         series: [
@@ -95,8 +96,7 @@ export default class Score extends React.Component {
                             color: 'rgb(255, 70, 131)'
                         }])
                     }
-                },
-                data: onlineData.ics
+                }
             },
             {
               name:'摄像头数据量(模拟数据)',
@@ -120,109 +120,16 @@ export default class Score extends React.Component {
                           color: '#0099CC'
                       }])
                   }
-              },
-              data: onlineData.camera
+              }
           }
         ]
     };
-    this.optionOffline = {
-      tooltip: {
-          trigger: 'axis',
-          position: function (pt) {
-              return [pt[0], '60%'];
-          }
-      },
-      grid: {
-          left: '1%',
-          right: '1%',
-          bottom: '6%',
-          top: '6%',
-          containLabel: true
-      },
-      xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: offlineData.date,
-          axisLabel: {
-            color: 'white'
-          }
-      },
-      yAxis: [
-        {
-          type: 'value',
-          boundaryGap: [0, '20%'],
-          min: function(value) {
-              return value.min - 300 > 0 ? value.min - 300 : 0;
-          },
-          axisLabel: {
-            color: 'white'
-          },
-          splitNumber: 5
-        },
-        {
-          type: 'value',
-          boundaryGap: [0, '20%'],
-          min: function(value) {
-              return value.min - 30 > 0 ? value.min - 30 : 0;
-          },
-          axisLabel: {
-            color: 'white'
-          },
-          splitNumber: 5
-        }
-      ],
-      series: [
-          {
-              name:'工控设备数据量(模拟数据)',
-              type:'line',
-              smooth:true,
-              symbol: 'none',
-              sampling: 'average',
-              itemStyle: {
-                  normal: {
-                      color: 'rgb(255, 70, 131)'
-                  }
-              },
-              areaStyle: {
-                  normal: {
-                      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                          offset: 0,
-                          color: 'rgb(255, 158, 68)'
-                      }, {
-                          offset: 1,
-                          color: 'rgb(255, 70, 131)'
-                      }])
-                  }
-              },
-              data: offlineData.ics
-          },
-          {
-            name:'摄像头数据量(模拟数据)',
-            type:'line',
-            smooth:true,
-            symbol: 'none',
-            sampling: 'average',
-            yAxisIndex: 1,
-            itemStyle: {
-                normal: {
-                    color: '#0099CC'
-                }
-            },
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: '#3366CC'
-                    }, {
-                        offset: 1,
-                        color: '#0099CC'
-                    }])
-                }
-            },
-            data: offlineData.camera
-        }
-      ]
-  };
+    this.optionOnline = Object.assign({}, this.baseOption);
+    this.optionOffline = Object.assign({}, this.baseOption);
+    this.optionOnline.series[0].data = onlineData.ics;
+    this.optionOnline.series[1].data = onlineData.camera;
+    this.optionOffline.series[0].data = offlineData.ics;
+    this.optionOffline.series[1].data = offlineData.camera;
   }
   render() {
     return (
