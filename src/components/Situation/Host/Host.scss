@@ -9,6 +9,9 @@
   overflow: scroll;
   .u-thead {
     border-bottom: 1px solid white;
+    th {
+      font-size: 12px;
+    }
   }
   .u-tbody {
     text-align: center;
