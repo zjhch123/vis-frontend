@@ -17,6 +17,7 @@
     "deck.gl": "^4.1.2",
     "dotenv": "4.0.0",
     "echarts": "^3.7.1",
+    "echarts-for-react": "^2.0.0",
     "eslint": "3.19.0",
     "eslint-config-react-app": "^1.0.5",
     "eslint-loader": "1.7.1",

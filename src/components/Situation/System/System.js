@@ -1,10 +1,12 @@
 import React from 'react';
-import Echarts from 'echarts';
 import style from './System.scss';
+import ReactEcharts from 'echarts-for-react';
+// import Echarts from 'echarts/lib/echarts';
 
 export default class System extends React.Component {
-  componentDidMount() {
-    const option = {
+  constructor(props) {
+    super(props);
+    this.option = {
       tooltip: {
           trigger: 'axis'
       },
@@ -18,8 +20,8 @@ export default class System extends React.Component {
       grid: {
           left: '3%',
           right: '4%',
-          bottom: '3%',
-          top: '40%',
+          bottom: '8%',
+          top: '44%',
           containLabel: true
       },
       xAxis: {
@@ -28,6 +30,9 @@ export default class System extends React.Component {
           data: ['20170919', '20170920', '20170921','20170922','20170923','20170924','20170925','20170926','20170927', '20170928', '20170929', '20170930'],
           axisLabel: {
             color: 'white'
+          },
+          splitLine: {
+            show: false
           }
       },
       yAxis: {
@@ -49,14 +54,17 @@ export default class System extends React.Component {
           }
       ]
     };
-    const charts = Echarts.init(this.refs['system-charts']);
-    charts.setOption(option);
   }
   render() {
     return (
       <div className={style.cSystem}>
         <p className={style.uSystem}>系统已平稳运行: 31天20小时</p>
-        <div className={style.cCharts} ref="system-charts"></div>
+        <ReactEcharts 
+          style={{}}
+          option={this.option} 
+          notMerge={true} 
+          lazyUpdate={true} 
+          className={style.cCharts}/>
       </div>
     )
   }

@@ -1151,9 +1151,8 @@ export default class Situation extends React.Component {
 
         const charts = Echarts.init(document.getElementById('charts'));
         charts.setOption(option);
-        this.bmap = window.bmap = charts.getModel().getComponent('bmap').getBMap();
+        this.bmap = charts.getModel().getComponent('bmap').getBMap();
         this.bmap.setMinZoom(5);
-        this.getBoundary('中国');
     }
 
     componentDidMount() {
@@ -1169,7 +1168,7 @@ export default class Situation extends React.Component {
         });
     }
 
-    async getBoundary(location) {       
+    async getBoundary(location) {  
         const rs = await this._bmapGetBoundary(location);
 		this.bmap.removeOverlay(this.overlay);
         var count = rs.boundaries.length;

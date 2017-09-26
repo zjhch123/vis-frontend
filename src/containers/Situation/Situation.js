@@ -4,6 +4,7 @@ import ChinaMap from '../../components/Situation/ChinaMap/Map';
 import Total from '../../components/Situation/Total/Total';
 import Score from '../../components/Situation/Score/Score';
 import System from '../../components/Situation/System/System';
+import Follow from '../../components/Situation/Follow/Follow';
 import style from './style.scss';
 
 export default class Situation extends React.Component {
@@ -41,6 +42,7 @@ export default class Situation extends React.Component {
           </Block>
           <Block className={style.mFollow}>
             <Block.Title>态势跟踪</Block.Title>
+            <Follow />
           </Block>
           <Block className={style.mSituation}>
             <Block.Title>应急响应中心</Block.Title>
