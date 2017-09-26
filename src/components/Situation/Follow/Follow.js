@@ -64,6 +64,7 @@ export default class Score extends React.Component {
           {
             type: 'value',
             boundaryGap: [0, '20%'],
+            splitNumber: 5,
             min: function(value) {
                 return value.min - 30 > 0 ? value.min - 30 : 0;
             },
@@ -124,8 +125,8 @@ export default class Score extends React.Component {
           }
         ]
     };
-    this.optionOnline = Object.assign({}, this.baseOption);
-    this.optionOffline = Object.assign({}, this.baseOption);
+    this.optionOnline = JSON.parse(JSON.stringify(this.baseOption));
+    this.optionOffline = JSON.parse(JSON.stringify(this.baseOption));
     this.optionOnline.series[0].data = onlineData.ics;
     this.optionOnline.series[1].data = onlineData.camera;
     this.optionOffline.series[0].data = offlineData.ics;

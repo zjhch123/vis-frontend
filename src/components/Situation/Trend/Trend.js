@@ -8,20 +8,16 @@ export default class Trend extends React.Component {
     const data = {"subtext":"漏洞趋势分布（周）","dataWeek":["五周","四周","三周","二周","一周","本周"],"repairedNum":[261,277,225,175,174,20],"notRepairedNum":[52,53,82,89,105,4],"countNum":[313,330,307,264,279,24]};
     this.option = {
       tooltip : {
-        trigger: 'axis'
-      },
-      toolbox: {
-        show : false,
-        x : '600',
-        feature : {
-          magicType: {show: true, type: ['line', 'bar']},
+        trigger: 'axis',
+        position: function (pt) {
+          return [pt[0], '0%'];
         }
       },
       grid: {
         left: '2%',
         right: '2%',
         bottom: '5%',
-        top: '18%',
+        top: '16%',
         containLabel: true
       },
       calculable : true,

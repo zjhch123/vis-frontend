@@ -1,4 +1,4 @@
-.c-province {
+.c-host {
   width: 100%;
   height: 100%;
   color: white;
@@ -14,18 +14,26 @@
     text-align: center;
     tr {
       border-top: 1px solid white;
+      font-size: 12px;
+      line-height: 24px;
       &:hover {
         background: #292b38;
       }
     }
   }
   .id {
-    width: 10%;
+    width: 5%;
+  }
+  .ip {
+    width: 30%;
   }
   .province {
-    width: 60%;
+    width: 20%;
   }
-  .count {
-    width: 30%;
+  .time {
+    width: 25%;
+  }
+  .type {
+    width: 20%;
   }
 }

@@ -7,6 +7,8 @@ import System from '../../components/Situation/System/System';
 import Follow from '../../components/Situation/Follow/Follow';
 import Trend from '../../components/Situation/Trend/Trend';
 import Province from '../../components/Situation/Province/Province';
+import Port from '../../components/Situation/Port/Port';
+import Host from '../../components/Situation/Host/Host';
 import style from './style.scss';
 
 export default class Situation extends React.Component {
@@ -64,18 +66,24 @@ export default class Situation extends React.Component {
         <Block.Column className={style.gRight}>
           <Block className={style.mBlock}>
             <Block.Title>行政区块</Block.Title>
-            <Block.Container className={style.mProvince}>
+            <Block.Container className={style.fScroll}>
               <Province />
             </Block.Container>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>端口分布</Block.Title>
+            <Block.Container>
+              <Port />
+            </Block.Container>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>鉴势雷达</Block.Title>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>主机跟踪</Block.Title>
+            <Block.Container className={style.fScroll}>
+              <Host />
+            </Block.Container>
           </Block>
         </Block.Column>
       </div>

@@ -12,7 +12,7 @@ export default class System extends React.Component {
       },
       legend: {
           data:['内存(%)','cpu(%)'],
-          top: '28%',
+          top: '18%',
           textStyle: {
             color: 'white'
           }
@@ -21,7 +21,7 @@ export default class System extends React.Component {
           left: '3%',
           right: '4%',
           bottom: '8%',
-          top: '44%',
+          top: '30%',
           containLabel: true
       },
       xAxis: {
@@ -39,6 +39,9 @@ export default class System extends React.Component {
           type: 'value',
           axisLabel: {
             color: 'white'
+          },
+          max: function(value) {
+            return value.max + 20 > 100 ? 100 : value.max + 20
           }
       },
       series: [
