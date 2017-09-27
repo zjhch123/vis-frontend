@@ -41,7 +41,7 @@ export default class Situation extends React.Component {
 
   render() {
     return (
-      <div onMouseMove={this.handlerMouseOver.bind(this)} ref="container" className={style.cSituation} style={{height: (document.documentElement.clientHeight > 700 ? document.documentElement.clientHeight : 700) + 'px'}}>
+      <div onMouseMove={this.handlerMouseOver.bind(this)} ref="container" className={style.cSituation} style={{height: (document.documentElement.clientHeight > 600 ? document.documentElement.clientHeight : 600) + 'px'}}>
         <Header className={style.mFixHeader}/>
         <Block.Column className={style.gLeft}>
           <Block className={style.mBlock}>
