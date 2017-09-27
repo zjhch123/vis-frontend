@@ -4,6 +4,7 @@ export default {
   ShiChuang: '/search',
   OpenAPI: '/open',
   HighSearch: '/find',
+  Situation: '/situation',
   Help: '/help',
   About: '/about',
   Register: '/register',

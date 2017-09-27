@@ -12,6 +12,7 @@ export default () => (
         <NavLink activeClassName={style.active} exact to={URL.Index}>首页</NavLink>
         <NavLink activeClassName={style.active} exact to={URL.ShiChuang}>势窗</NavLink>
         <a href={URL.ShiJie} target='_blank'>势界</a>
+        <NavLink activeClassName={style.active} exact to={URL.Situation}>态势感知</NavLink>
         <NavLink activeClassName={style.active} exact to={URL.OpenAPI}>开放API</NavLink>
       </LinkGroup>
       <LinkGroup className={style.mGroup2} title="更多">

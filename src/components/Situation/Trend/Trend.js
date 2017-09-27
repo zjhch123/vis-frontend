@@ -5,7 +5,7 @@ import Echarts from 'echarts';
 export default class Trend extends React.Component {
   constructor(props) {
     super(props);
-    const data = {"subtext":"漏洞趋势分布（周）","dataWeek":["五周","四周","三周","二周","一周","本周"],"repairedNum":[261,277,225,175,174,20],"notRepairedNum":[52,53,82,89,105,4],"countNum":[313,330,307,264,279,24]};
+    const data = {"subtext":"漏洞趋势分布（周）","dataWeek":["五周","四周","三周","二周","一周","本周"],"repairedNum":[261,277,225,175,174,37],"notRepairedNum":[52,53,82,89,105,8],"countNum":[313,330,307,264,279,45]};
     this.option = {
       tooltip : {
         trigger: 'axis',

@@ -1,4 +1,5 @@
 import React from 'react';
+import Header from '../../components/IndexHeader/Header';
 import Block from '../../components/Situation/Block/Block';
 import ChinaMap from '../../components/Situation/ChinaMap/Map';
 import Total from '../../components/Situation/Total/Total';
@@ -26,13 +27,22 @@ export default class Situation extends React.Component {
     }, 0);
   }
 
+  handlerMouseOver(e) {
+    if (e.clientY <= 48) {
+      this.refs.container.classList.remove(style.fHideHeader);
+      return;
+    }
+    this.refs.container.classList.add(style.fHideHeader);
+  }
+
   handlerShowProvince(province) {
     this.refs.bmap.getBoundary(province);
   }
 
   render() {
     return (
-      <div className={style.cSituation} style={{height: (document.documentElement.clientHeight > 700 ? document.documentElement.clientHeight : 700) + 'px'}}>
+      <div onMouseMove={this.handlerMouseOver.bind(this)} ref="container" className={style.cSituation} style={{height: (document.documentElement.clientHeight > 700 ? document.documentElement.clientHeight : 700) + 'px'}}>
+        <Header className={style.mFixHeader}/>
         <Block.Column className={style.gLeft}>
           <Block className={style.mBlock}>
             <Block.Title>总数、分布</Block.Title>

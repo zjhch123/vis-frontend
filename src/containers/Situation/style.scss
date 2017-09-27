@@ -1,4 +1,9 @@
 $asideWidth: 330px;
+.f-hide-header {
+  .m-fix-header {
+    transform: translateY(-100%);
+  }
+}
 .c-situation {
   min-width: 1090px;
   min-height: 700px;
@@ -6,6 +11,15 @@ $asideWidth: 330px;
   * {
     box-sizing: border-box;
   }
+}
+.m-fix-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: black;
+  transition: transform .6s;
 }
 .g-center, .g-left, .g-right {
   height: 100%;
