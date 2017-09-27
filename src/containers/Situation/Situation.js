@@ -16,9 +16,17 @@ export default class Situation extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    setTimeout(function() {
-      this.refs.bmap.getBoundary('浙江');
-    }.bind(this), 5000);
+    // setTimeout(function() {
+    //   this.refs.bmap.getBoundary('浙江');
+    // }.bind(this), 5000);
+    setTimeout(() => {
+      this.refs['bmap'].renderCharts();
+      this.refs['score'].renderCharts();
+      this.refs['system'].renderCharts();
+      this.refs['follow'].renderCharts();
+      this.refs['trend'].renderCharts();
+      this.refs['port'].renderCharts();
+    }, 0);
   }
 
   render() {
@@ -34,13 +42,13 @@ export default class Situation extends React.Component {
           <Block className={style.mBlock}>
             <Block.Title>实时安全评分</Block.Title>
             <Block.Container>
-              <Score />
+              <Score ref="score"/>
             </Block.Container>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>系统运行情况</Block.Title>
             <Block.Container>
-              <System />
+              <System ref="system"/>
             </Block.Container>
           </Block>
         </Block.Column>
@@ -54,13 +62,13 @@ export default class Situation extends React.Component {
           <Block className={`${style.mBlock} ${style.mFollow}`}>
             <Block.Title>态势跟踪</Block.Title>
             <Block.Container>
-              <Follow />
+              <Follow ref="follow"/>
             </Block.Container>
           </Block>
           <Block className={`${style.mBlock} ${style.mTrend}`}>
             <Block.Title>漏洞趋势分布</Block.Title>
             <Block.Container>
-              <Trend />
+              <Trend ref="trend"/>
             </Block.Container>
           </Block>
         </Block.Column>
@@ -74,7 +82,7 @@ export default class Situation extends React.Component {
           <Block className={style.mBlock}>
             <Block.Title>端口分布</Block.Title>
             <Block.Container>
-              <Port />
+              <Port ref="port"/>
             </Block.Container>
           </Block>
           <Block className={style.mBlock}>

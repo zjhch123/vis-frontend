@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Score.scss';
-import ReactEcharts from 'echarts-for-react';
+import Echarts from 'echarts';
 
 export default class Score extends React.Component {
   constructor(props) {
@@ -37,16 +37,16 @@ export default class Score extends React.Component {
       }]
     };
   }
+  renderCharts() {
+    const charts = Echarts.init(this.refs.charts);
+    charts.setOption(this.option);
+  }
   render() {
     return (
       <div className={style.cScore}>
         <p className={style.uScore}>整体评分: 75分</p>
         <p className={style.uRank}>危害等级: 中等</p>
-        <ReactEcharts 
-          style={{}}
-          option={this.option} 
-          notMerge={true} 
-          lazyUpdate={true} 
+        <div ref="charts"
           className={style.cCharts}/>
       </div>
     )

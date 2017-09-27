@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './Follow.scss';
-import echarts from 'echarts/lib/echarts';
-import ReactEcharts from 'echarts-for-react';
+import Echarts from 'echarts';
 
 export default class Score extends React.Component {
   constructor(props) {
@@ -89,7 +88,7 @@ export default class Score extends React.Component {
                 },
                 areaStyle: {
                     normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        color: new Echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                             offset: 0,
                             color: 'rgb(255, 158, 68)'
                         }, {
@@ -113,7 +112,7 @@ export default class Score extends React.Component {
               },
               areaStyle: {
                   normal: {
-                      color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                      color: new Echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                           offset: 0,
                           color: '#3366CC'
                       }, {
@@ -132,26 +131,28 @@ export default class Score extends React.Component {
     this.optionOffline.series[0].data = offlineData.ics;
     this.optionOffline.series[1].data = offlineData.camera;
   }
+  renderCharts() {
+    const chartsOnline = Echarts.init(this.refs.chartsOnline);
+    chartsOnline.setOption(this.optionOnline);
+    const chartsOffline = Echarts.init(this.refs.chartsOffline);
+    chartsOffline.setOption(this.optionOffline);
+  }
   render() {
     return (
       <div className={style.cFollow}>
         <div className={style.gLeft}>
-          <p className={style.uTitle}>线上扫描</p>
-          <ReactEcharts 
-            style={{}}
-            option={this.optionOnline} 
-            notMerge={true} 
-            lazyUpdate={true} 
-            className={style.cCharts}/>
+          <div className={style.mContainer}>
+            <p className={style.uTitle}>线上扫描</p>
+            <div ref="chartsOnline"
+                className={style.cCharts}/>
+          </div>
         </div>
         <div className={style.gRight}>
-          <p className={style.uTitle}>线下核查</p>
-          <ReactEcharts 
-            style={{}}
-            option={this.optionOffline} 
-            notMerge={true} 
-            lazyUpdate={true} 
-            className={style.cCharts}/>
+          <div className={style.mContainer}>
+            <p className={style.uTitle}>线下核查</p>
+            <div ref="chartsOffline"
+                className={style.cCharts}/>
+          </div>
         </div>
       </div>
     )

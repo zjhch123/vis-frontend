@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './System.scss';
-import ReactEcharts from 'echarts-for-react';
-// import Echarts from 'echarts/lib/echarts';
+import Echarts from 'echarts';
 
 export default class System extends React.Component {
   constructor(props) {
@@ -58,15 +57,15 @@ export default class System extends React.Component {
       ]
     };
   }
+  renderCharts() {
+    const charts = Echarts.init(this.refs.charts);
+    charts.setOption(this.option);
+  }
   render() {
     return (
-      <div className={style.cSystem}>
+      <div className={style.cSystem} id="systemChartsContainer">
         <p className={style.uSystem}>系统已平稳运行: 31天20小时</p>
-        <ReactEcharts 
-          style={{}}
-          option={this.option} 
-          notMerge={true} 
-          lazyUpdate={true} 
+        <div ref="charts"
           className={style.cCharts}/>
       </div>
     )

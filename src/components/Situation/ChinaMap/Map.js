@@ -1149,14 +1149,10 @@ export default class Situation extends React.Component {
             ]
         };
 
-        const charts = Echarts.init(document.getElementById('charts'));
+        const charts = Echarts.init(this.refs.charts);
         charts.setOption(option);
         this.bmap = charts.getModel().getComponent('bmap').getBMap();
         this.bmap.setMinZoom(5);
-    }
-
-    componentDidMount() {
-        this.renderCharts();
     }
 
     _bmapGetBoundary(location) {
@@ -1191,7 +1187,7 @@ export default class Situation extends React.Component {
     render() {
         return (
         <div className={style.cMap}>
-            <div id="charts" className={style.mCharts}></div> 
+            <div ref="charts" className={style.mCharts}></div> 
         </div>)
     }
 }

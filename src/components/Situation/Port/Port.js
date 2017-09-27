@@ -1,6 +1,6 @@
 import React from 'react';
+import Echarts from 'echarts';
 import style from './Port.scss';
-import ReactEcharts from 'echarts-for-react';
 
 export default class System extends React.Component {
   constructor(props) {
@@ -36,14 +36,14 @@ export default class System extends React.Component {
         ]
     };
   }
+  renderCharts() {
+    const charts = Echarts.init(this.refs.charts);
+    charts.setOption(this.option);
+  }
   render() {
     return (
       <div className={style.cPort}>
-        <ReactEcharts 
-          style={{}}
-          option={this.option} 
-          notMerge={true} 
-          lazyUpdate={true} 
+        <div ref="charts"
           className={style.cCharts}/>
       </div>
     )

@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './Trend.scss';
-import ReactEcharts from 'echarts-for-react';
+import Echarts from 'echarts';
 
 export default class Trend extends React.Component {
   constructor(props) {
@@ -91,14 +91,14 @@ export default class Trend extends React.Component {
       }]
     };
   }
+  renderCharts() {
+    const charts = Echarts.init(this.refs.charts);
+    charts.setOption(this.option);
+  }
   render() {
     return (
       <div className={style.cTrend}>
-        <ReactEcharts 
-          style={{}}
-          option={this.option} 
-          notMerge={true} 
-          lazyUpdate={true} 
+        <div ref="charts"
           className={style.cCharts}/>
       </div>
     )
