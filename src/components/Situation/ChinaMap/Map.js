@@ -1166,18 +1166,19 @@ export default class Situation extends React.Component {
 
     async getBoundary(location) {  
         const rs = await this._bmapGetBoundary(location);
-		this.bmap.removeOverlay(this.overlay);
+        this.bmap.removeOverlay(this.overlay);
+        this.overlay = null;
         var count = rs.boundaries.length;
         if (count === 0) {
             return;
         }
         var pointArray = [];
-        for (var i = 0; i < count; i++) {
+        for (var i = 0; i < 1; i++) {
             this.overlay = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 2, strokeColor: "#000000", fillColor: ''}); 
             this.bmap.addOverlay(this.overlay);  
             pointArray = pointArray.concat(this.overlay.getPath());
         }
-        this.bmap.setViewport(pointArray);    
+        this.bmap.setViewport(pointArray);  
 	}
 
     clearBoundary() {

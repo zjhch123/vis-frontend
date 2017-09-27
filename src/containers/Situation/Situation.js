@@ -16,9 +16,6 @@ export default class Situation extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    // setTimeout(function() {
-    //   this.refs.bmap.getBoundary('浙江');
-    // }.bind(this), 5000);
     setTimeout(() => {
       this.refs['bmap'].renderCharts();
       this.refs['score'].renderCharts();
@@ -27,6 +24,10 @@ export default class Situation extends React.Component {
       this.refs['trend'].renderCharts();
       this.refs['port'].renderCharts();
     }, 0);
+  }
+
+  handlerShowProvince(province) {
+    this.refs.bmap.getBoundary(province);
   }
 
   render() {
@@ -76,7 +77,7 @@ export default class Situation extends React.Component {
           <Block className={style.mBlock}>
             <Block.Title>行政区块</Block.Title>
             <Block.Container className={style.fScroll}>
-              <Province />
+              <Province showProvince={(province) => this.handlerShowProvince(province)}/>
             </Block.Container>
           </Block>
           <Block className={style.mBlock}>

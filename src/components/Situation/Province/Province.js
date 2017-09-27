@@ -3,6 +3,50 @@ import style from './Province.scss';
 
 export default class Province extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.option = {
+      provinces: [
+        {
+          province: '福建',
+          count: '288'
+        },
+        {
+          province: '广东',
+          count: '96'
+        },
+        {
+          province: '北京',
+          count: '92'
+        },
+        {
+          province: '吉林',
+          count: '90'
+        },
+        {
+          province: '浙江',
+          count: '55'
+        },
+        {
+          province: '江苏',
+          count: '47'
+        },
+        {
+          province: '湖北',
+          count: '46'
+        },
+        {
+          province: '山东',
+          count: '44'
+        },
+      ]
+    }
+  }
+
+  handlerTRClick(province) {
+    this.props.showProvince(province);
+  }
+
   render() {
     return (
       <div className={style.cProvince}>
@@ -15,46 +59,15 @@ export default class Province extends React.Component {
             </tr>
           </thead>
           <tbody className={style.uTbody}>
-            <tr>
-              <td className={style.id}>1</td>
-              <td className={style.province}>福建</td>
-              <td className={style.count}>288</td>
-            </tr>
-            <tr>
-              <td className={style.id}>2</td>
-              <td className={style.province}>广东</td>
-              <td className={style.count}>96</td>
-            </tr>
-            <tr>
-              <td className={style.id}>3</td>
-              <td className={style.province}>北京</td>
-              <td className={style.count}>92</td>
-            </tr>
-            <tr>
-              <td className={style.id}>4</td>
-              <td className={style.province}>吉林</td>
-              <td className={style.count}>90</td>
-            </tr>
-            <tr>
-              <td className={style.id}>5</td>
-              <td className={style.province}>浙江</td>
-              <td className={style.count}>55</td>
-            </tr>
-            <tr>
-              <td className={style.id}>6</td>
-              <td className={style.province}>江苏</td>
-              <td className={style.count}>47</td>
-            </tr>
-            <tr>
-              <td className={style.id}>7</td>
-              <td className={style.province}>湖北</td>
-              <td className={style.count}>46</td>
-            </tr>
-            <tr>
-              <td className={style.id}>8</td>
-              <td className={style.province}>山东</td>
-              <td className={style.count}>44</td>
-            </tr>
+            {
+              this.option.provinces.map((data, index) => (
+                <tr key={index} onClick={() => this.handlerTRClick(data.province)}>
+                  <td className={style.id}>{index + 1}</td>
+                  <td className={style.province}>{data.province}</td>
+                  <td className={style.count}>{data.count}</td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>

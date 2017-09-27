@@ -12,6 +12,7 @@
   .u-tbody {
     text-align: center;
     tr {
+      cursor: pointer;
       border-top: 1px solid white;
       &:hover {
         background: #292b38;
