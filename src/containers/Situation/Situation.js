@@ -9,6 +9,7 @@ import Trend from '../../components/Situation/Trend/Trend';
 import Province from '../../components/Situation/Province/Province';
 import Port from '../../components/Situation/Port/Port';
 import Host from '../../components/Situation/Host/Host';
+import Radar from '../../components/Situation/Radar/Radar';
 import style from './style.scss';
 
 export default class Situation extends React.Component {
@@ -56,7 +57,7 @@ export default class Situation extends React.Component {
               <Follow />
             </Block.Container>
           </Block>
-          <Block className={`${style.mBlock} ${style.mSituation}`}>
+          <Block className={`${style.mBlock} ${style.mTrend}`}>
             <Block.Title>漏洞趋势分布</Block.Title>
             <Block.Container>
               <Trend />
@@ -78,6 +79,9 @@ export default class Situation extends React.Component {
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>鉴势雷达</Block.Title>
+            <Block.Container>
+              <Radar />
+            </Block.Container>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>主机跟踪</Block.Title>

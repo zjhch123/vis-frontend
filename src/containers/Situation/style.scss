@@ -8,19 +8,25 @@
   }
 }
 .g-center, .g-left, .g-right {
-  display: flex;
-  flex-direction: column;
+  height: 100%
+}
+.g-left {
   .m-block {
-    flex: 1;
+    height: 33.3%;
   }
 }
 .g-center {
   flex: 1;
   .m-map {
-    flex: 1 1 60%;
+    height: 60%;
   }
-  .m-follow, .m-situation {
-    flex: 1 1 20%;
+  .m-follow, .m-trend {
+    height: 20%;
+  }
+}
+.g-right {
+  .m-block {
+    height: 25%;
   }
 }
 .g-left, .g-right {

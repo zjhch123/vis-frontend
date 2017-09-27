@@ -1,6 +1,5 @@
 import React from 'react';
 import style from './Block.scss';
-import PropTypes from 'prop-types';
 
 const Column = (props) => (
   <div className={`${props.className}  ${style.cColumn}`}>
