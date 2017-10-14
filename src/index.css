@@ -12,7 +12,6 @@
 }
 body, dl, dd, ul, ol, h1, h2, h3, h4, h5, h6, p, form, input, textarea, button, th, td { margin: 0; padding: 0; }
 img, iframe { border: 0 none; }
-table { border-collapse: collapse; border-spacing: 0; table-layout: fixed; }
 ol, ul { list-style: none outside none; }
 h1, h2, h3, h4, h5, h6 { font-size: 100%; font-weight: bold; }
 em, strong { font-style: normal; font-weight: bold; }

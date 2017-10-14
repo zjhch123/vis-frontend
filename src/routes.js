@@ -11,6 +11,7 @@ import Find from './containers/Find/Find';
 import Help from './containers/Help/Help';
 import About from './containers/About/About';
 import NoMatch from './containers/NoMatch/NoMatch';
+import Module from './containers/Module/Module';
 
 const AsyncSituation = asyncComonent(() => import('./containers/Situation/Situation'));
 
@@ -24,6 +25,7 @@ const routes = ({history}) => (
       <Route path="/help" component={Help} />
       <Route path="/about" component={About} />
       <Route path="/situation" component={AsyncSituation} />
+      <Route path="/module" component={Module} />
       <Route component={NoMatch}/>
     </Switch>
   </ConnectedRouter>
