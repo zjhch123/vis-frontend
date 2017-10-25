@@ -12,10 +12,10 @@ export default class Header extends React.Component {
         </div>
         <div className={style.gRight}>
           <Link to={URL.Index} className={style.uLinkItem}>首页</Link>
-          <NavLink exact to={URL.ShiChuang} className={style.uLinkItem} activeClassName={style.active}>势窗</NavLink>
+          <NavLink exact to={URL.HighSearch} className={style.uLinkItem} activeClassName={style.active}>势窗</NavLink>
           <a href={URL.ShiJie} className={style.uLinkItem}>势界</a>
           <NavLink exact to={URL.Situation} className={style.uLinkItem} activeClassName={style.active}>态势</NavLink>
-          <NavLink exact to={URL.OpenAPI} className={style.uLinkItem} activeClassName={style.active}>开放API</NavLink>
+          <NavLink exact to={URL.Module} className={style.uLinkItem} activeClassName={style.active}>协议支持</NavLink>
           <NavLink exact to={URL.Help} className={style.uLinkItem} activeClassName={style.active}>帮助</NavLink>
           <NavLink exact to={URL.About} className={style.uLinkItem} activeClassName={style.active}>关于我们</NavLink>
         </div>

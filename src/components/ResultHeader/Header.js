@@ -8,12 +8,12 @@ export default ({className}) => (
     <div className={style.gLeft}>
       <NavLink exact to={URL.Index} className={style.uLinkItem} activeClassName={style.active}>首页</NavLink>
       <NavLink to={{
-        pathname: URL.ShiChuang,
+        pathname: URL.HighSearch,
         search: window.location.search
       }} className={style.uLinkItem} activeClassName={style.active}>势窗</NavLink>
       <a href={URL.ShiJie} className={style.uLinkItem}>势界</a>
       <Link to={URL.Situation} className={style.uLinkItem}>态势</Link>
-      <NavLink exact to={URL.OpenAPI} className={style.uLinkItem} activeClassName={style.active}>开放API</NavLink>
+      <NavLink exact to={URL.Module} className={style.uLinkItem} activeClassName={style.active}>协议支持</NavLink>
       <Link to={URL.Help} className={style.uLinkItem}>帮助</Link>
       <Link to={URL.About} className={style.uLinkItem}>关于我们</Link>
     </div>
