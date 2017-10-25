@@ -10,14 +10,13 @@ export default () => (
     <div className={style.gRow}>
       <LinkGroup className={style.mGroup1} title="主导航">
         <NavLink activeClassName={style.active} exact to={URL.Index}>首页</NavLink>
-        <NavLink activeClassName={style.active} exact to={URL.ShiChuang}>势窗</NavLink>
+        <NavLink activeClassName={style.active} exact to={URL.HighSearch}>势窗</NavLink>
         <a href={URL.ShiJie} target='_blank'>势界</a>
         <NavLink activeClassName={style.active} exact to={URL.Situation}>态势感知</NavLink>
-        <NavLink activeClassName={style.active} exact to={URL.OpenAPI}>开放API</NavLink>
+        <NavLink activeClassName={style.active} exact to={URL.Module}>协议支持</NavLink>
       </LinkGroup>
       <LinkGroup className={style.mGroup2} title="更多">
-        <NavLink activeClassName={style.active} exact to={URL.HighSearch}>高级搜索</NavLink>
-        <NavLink activeClassName={style.active} exact to={URL.Module}>协议支持</NavLink>
+        <NavLink activeClassName={style.active} exact to={URL.OpenAPI}>开放API</NavLink>        
         <NavLink activeClassName={style.active} exact to={URL.Topic}>专题报告</NavLink>
         <NavLink activeClassName={style.active} exact to={URL.Upload}>提交检测</NavLink>
         <NavLink activeClassName={style.active} exact to={URL.UpgradeLog}>更新记录</NavLink>
