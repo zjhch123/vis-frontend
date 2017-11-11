@@ -1,4 +1,5 @@
 import {SearchAPI, GroupAPI, MapAPI, HostAPI} from '../api';
+import {TotalAPI, ScoreAPI, SystemAPI, TrendAPI, ProvinceAPI, PortAPI, HostAPI as SituationHostAPI} from '../api/situation';
 
 const SearchStart = (condition) => ({
   type: 'SEARCH_START',
@@ -62,6 +63,106 @@ const HostError = (condition) => ({
   condition
 });
 
+const SituationTotalStart = (condition) => ({
+  type: 'TOTAL_START',
+  condition
+})
+
+const SituationTotalSuccess = (result) => ({
+  type: 'TOTAL_SUCCESS',
+  payload: result
+})
+
+const SituationTotalError = () => ({
+  type: 'TOTAL_ERROR'
+})
+
+const SituationScoreStart = (condition) => ({
+  type: 'SCORE_START',
+  condition
+})
+
+const SituationScoreSuccess = (result) => ({
+  type: 'SCORE_SUCCESS',
+  payload: result
+})
+
+const SituationScoreError = () => ({
+  type: 'SCORE_ERROR'
+})
+
+const SituationSystemStart = () => ({
+  type: 'SYSTEM_START'
+})
+
+const SituationSystemSuccess = (result) => ({
+  type: 'SYSTEM_SUCCESS',
+  payload: result
+})
+
+const SituationSystemError = () => ({
+  type: 'SYSTEM_ERROR'
+})
+
+const SituationTrendStart = () => ({
+  type: 'TREND_START'
+})
+
+const SituationTrendSuccess = (result) => ({
+  type: 'TREND_SUCCESS',
+  payload: result
+})
+
+const SituationTrendError = () => ({
+  type: 'TREND_ERROR'
+})
+
+const SituationProvinceStart = () => ({
+  type: 'PROVINCE_START'
+})
+
+const SituationProvinceSuccess = (result) => ({
+  type: 'PROVINCE_SUCCESS',
+  payload: result
+})
+
+const SituationProvinceError = () => ({
+  type: 'PROVINCE_ERROR'
+})
+
+const SituationPortStart = (condition) => ({
+  type: 'SPORT_START',
+  condition
+})
+
+const SituationPortSuccess = (result) => ({
+  type: 'SPORT_SUCCESS',
+  payload: result
+})
+
+const SituationPortError = () => ({
+  type: 'SPORT_ERROR'
+})
+
+const SituationHostStart = () => ({
+  type: 'SHOST_START'
+})
+
+const SituationHostSuccess = (result) => ({
+  type: 'SHOST_SUCCESS',
+  payload: result
+})
+
+const SituationHostError = () => ({
+  type: 'SHOST_ERROR'
+})
+
+
+
+
+
+
+
 export const SearchAction = (condition, page, pageSize) => (dispatch) => {
   dispatch(SearchStart({condition, page, pageSize}));
   SearchAPI(condition, page, pageSize)
@@ -94,3 +195,51 @@ export const HostAction = (condition) => (dispatch) => {
     .catch(error => dispatch(HostError(condition)));
 }
 
+export const SituationTotalAction = (condition) => (dispatch) => {
+  dispatch(SituationTotalStart(condition));
+  TotalAPI(condition)
+      .then(json => dispatch(SituationTotalSuccess(json)))
+      .catch( error => dispatch(SituationTotalError()));
+}
+
+export const SituationScoreAction = (condition) => (dispatch) => {
+  dispatch(SituationScoreStart(condition));
+  ScoreAPI(condition)
+      .then(json => dispatch(SituationScoreSuccess(json)))
+      .catch( error => dispatch(SituationScoreError()));
+}
+
+export const SituationSystemAction = () => (dispatch) => {
+  dispatch(SituationSystemStart());
+  SystemAPI()
+      .then(json => dispatch(SituationSystemSuccess(json)))
+      .catch( error => dispatch(SituationSystemError()));
+}
+
+export const SituationTrendAction = () => (dispatch) => {
+  dispatch(SituationTrendStart());
+  TrendAPI()
+      .then(json => dispatch(SituationTrendSuccess(json)))
+      .catch( error => dispatch(SituationTrendError()));
+}
+
+export const SituationProvinceAction = () => (dispatch) => {
+  dispatch(SituationProvinceStart());
+  ProvinceAPI()
+      .then(json => dispatch(SituationProvinceSuccess(json)))
+      .catch( error => dispatch(SituationProvinceError()));
+}
+
+export const SituationPortAction = (condition) => (dispatch) => {
+  dispatch(SituationPortStart(condition));
+  PortAPI(condition)
+      .then(json => dispatch(SituationPortSuccess(json)))
+      .catch( error => dispatch(SituationPortError()));
+}
+
+export const SituationHostAction = () => (dispatch) => {
+  dispatch(SituationHostStart());
+  SituationHostAPI()
+      .then(json => dispatch(SituationHostSuccess(json)))
+      .catch( error => dispatch(SituationHostError()));
+}

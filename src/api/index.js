@@ -1,6 +1,6 @@
 const API_ROOT = 'http://139.129.132.196:4399/';
 
-export const SearchAPI = (condition, page, pageSize, dispatch) => (
+export const SearchAPI = (condition, page, pageSize) => (
   fetch(`${API_ROOT}ics/query?q=${condition}&page=${page}&pageSize=${pageSize}`)
     .then(res => {
       if (res.status === 200) {

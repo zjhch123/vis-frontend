@@ -13,7 +13,21 @@ import Host from '../../components/Situation/Host/Host';
 import Radar from '../../components/Situation/Radar/Radar';
 import style from './style.scss';
 
-export default class Situation extends React.Component {
+import {Route} from 'react-router';
+import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
+
+import {
+  SituationTotalAction,
+  SituationScoreAction,
+  SituationSystemAction,
+  SituationTrendAction,
+  SituationProvinceAction,
+  SituationPortAction,
+  SituationHostAction
+} from '../../actions'
+
+class Situation extends React.Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -24,6 +38,13 @@ export default class Situation extends React.Component {
       this.refs['follow'].renderCharts();
       this.refs['trend'].renderCharts();
       this.refs['port'].renderCharts();
+      this.props.dispatchTotal('all')
+      this.props.dispatchScore('all')
+      this.props.dispatchSystem()
+      this.props.dispatchTrend()
+      this.props.dispatchProvince()
+      this.props.dispatchPort('all')
+      this.props.dispatchHost()
     }, 0);
   }
 
@@ -35,7 +56,10 @@ export default class Situation extends React.Component {
     this.refs.container.classList.add(style.fHideHeader);
   }
 
-  handlerShowProvince(province) {
+  handlerShowProvince(provincepy, province) {
+    this.props.dispatchTotal('area:' + provincepy)
+    this.props.dispatchScore('area:' + provincepy)
+    this.props.dispatchPort('area:' + provincepy)
     this.refs.bmap.getBoundary(province);
   }
 
@@ -47,19 +71,19 @@ export default class Situation extends React.Component {
           <Block className={style.mBlock}>
             <Block.Title>总数、分布</Block.Title>
             <Block.Container>
-              <Total />
+              <Total data={this.props.total}/>
             </Block.Container>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>实时安全评分</Block.Title>
             <Block.Container>
-              <Score ref="score"/>
+              <Score ref="score" data={this.props.score}/>
             </Block.Container>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>系统运行情况</Block.Title>
             <Block.Container>
-              <System ref="system"/>
+              <System ref="system" data={this.props.system}/>
             </Block.Container>
           </Block>
         </Block.Column>
@@ -71,7 +95,7 @@ export default class Situation extends React.Component {
             </Block.Container>
           </Block>
           <Block className={`${style.mBlock} ${style.mFollow}`}>
-            <Block.Title>态势跟踪</Block.Title>
+            <Block.Title>总体态势跟踪</Block.Title>
             <Block.Container>
               <Follow ref="follow"/>
             </Block.Container>
@@ -79,7 +103,7 @@ export default class Situation extends React.Component {
           <Block className={`${style.mBlock} ${style.mTrend}`}>
             <Block.Title>漏洞趋势分布</Block.Title>
             <Block.Container>
-              <Trend ref="trend"/>
+              <Trend ref="trend" data={this.props.trend}/>
             </Block.Container>
           </Block>
         </Block.Column>
@@ -87,13 +111,13 @@ export default class Situation extends React.Component {
           <Block className={style.mBlock}>
             <Block.Title>行政区块</Block.Title>
             <Block.Container className={style.fScroll}>
-              <Province showProvince={(province) => this.handlerShowProvince(province)}/>
+              <Province showProvince={(provincepy, province) => this.handlerShowProvince(provincepy, province)} data={this.props.province}/>
             </Block.Container>
           </Block>
           <Block className={style.mBlock}>
             <Block.Title>端口分布</Block.Title>
             <Block.Container>
-              <Port ref="port"/>
+              <Port ref="port" data={this.props.port}/>
             </Block.Container>
           </Block>
           <Block className={style.mBlock}>
@@ -105,7 +129,7 @@ export default class Situation extends React.Component {
           <Block className={style.mBlock}>
             <Block.Title>主机跟踪</Block.Title>
             <Block.Container className={style.fScroll}>
-              <Host />
+              <Host data={this.props.host}/>
             </Block.Container>
           </Block>
         </Block.Column>
@@ -113,3 +137,40 @@ export default class Situation extends React.Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  location: state.router.location,
+  total: state.s_total,
+  score: state.s_score,
+  system: state.s_system,
+  trend: state.s_trend,
+  province: state.s_province,
+  port: state.s_port,
+  host: state.s_host
+});
+
+const mapDispatchToProps = (dispatch, props) => ({
+  dispatchTotal: function(condition) {
+    dispatch(SituationTotalAction(condition));
+  },
+  dispatchScore: function(condition) {
+    dispatch(SituationScoreAction(condition));
+  },
+  dispatchSystem: function() {
+    dispatch(SituationSystemAction());
+  },
+  dispatchTrend: function() {
+    dispatch(SituationTrendAction());
+  },
+  dispatchProvince: function() {
+    dispatch(SituationProvinceAction());
+  },
+  dispatchPort: function(condition) {
+    dispatch(SituationPortAction(condition));
+  },
+  dispatchHost: function() {
+    dispatch(SituationHostAction());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Situation);

@@ -5,7 +5,8 @@ import Echarts from 'echarts';
 export default class Trend extends React.Component {
   constructor(props) {
     super(props);
-    const data = {"subtext":"漏洞趋势分布（周）","dataWeek":["五周","四周","三周","二周","一周","本周"],"repairedNum":[261,277,225,175,174,37],"notRepairedNum":[52,53,82,89,105,8],"countNum":[313,330,307,264,279,45]};
+    this.data = props.data.result
+    this.renderData = {"subtext":"漏洞趋势分布（周）","dataWeek":["五周","四周","三周","二周","一周","本周"],"repairedNum":[0,0,0,0,0,0],"notRepairedNum":[0,0,0,0,0,0],"countNum":[0,0,0,0,0,0]};
     this.option = {
       tooltip : {
         trigger: 'axis',
@@ -30,7 +31,7 @@ export default class Trend extends React.Component {
       xAxis : [
         {
           type : 'category',
-          data : data.dataWeek,
+          data : this.renderData.dataWeek,
           axisLine: {lineStyle: {color: 'white'}},
           axisLabel: {color: 'white'}
         }
@@ -59,7 +60,7 @@ export default class Trend extends React.Component {
             }
           }
         },
-        data:data.repairedNum
+        data:this.renderData.repairedNum
       },{
         name:'未修复',
         type:'bar',
@@ -73,7 +74,7 @@ export default class Trend extends React.Component {
             }
           }
         },
-        data:data.notRepairedNum
+        data:this.renderData.notRepairedNum
       },{
         name:'全部',
         type:'line',
@@ -87,13 +88,30 @@ export default class Trend extends React.Component {
             }
           }
         },
-        data:data.countNum
+        data:this.renderData.countNum
       }]
     };
   }
+  mappingData() {
+    this.renderData.repairedNum.splice(0)
+    this.renderData.notRepairedNum.splice(0)
+    this.renderData.countNum.splice(0)
+    this.data.forEach((item) => {
+      this.renderData.repairedNum.push(item.repaired)
+      this.renderData.notRepairedNum.push(item.notRepaired)
+      this.renderData.countNum.push(item.total)
+    })
+    this.renderCharts();
+  }
+  componentWillUpdate(newProps) {
+    this.data = newProps.data.result
+    this.mappingData();
+  }
   renderCharts() {
-    const charts = Echarts.init(this.refs.charts);
-    charts.setOption(this.option);
+    if (!this.charts) {
+      this.charts = Echarts.init(this.refs.charts);
+    }
+    this.charts.setOption(this.option);
   }
   render() {
     return (

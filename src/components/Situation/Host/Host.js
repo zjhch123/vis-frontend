@@ -1,7 +1,15 @@
 import React from 'react';
 import style from './Host.scss';
+import util from '../../../util'
 
 export default class Host extends React.Component {
+  constructor(props) {
+    super(props)
+    this.data = []
+  }
+  componentWillUpdate(newProps) {
+    this.data = newProps.data.result
+  }
   render() {
     return (
       <div className={style.cHost}>
@@ -16,76 +24,17 @@ export default class Host extends React.Component {
             </tr>
           </thead>
           <tbody className={style.uTbody}>
-            <tr>
-              <td className={style.id}>1</td>
-              <td className={style.ip}>222.80.100.216</td>
-              <td className={style.province}>福州</td>
-              <td className={style.time}>2017/09/21</td>
-              <td className={style.type}>扫描器</td>
-            </tr>
-            <tr>
-              <td className={style.id}>2</td>
-              <td className={style.ip}>61.177.54.155</td>
-              <td className={style.province}>上海</td>
-              <td className={style.time}>2017/09/21</td>
-              <td className={style.type}>扫描器</td>
-            </tr>
-            <tr>
-              <td className={style.id}>3</td>
-              <td className={style.ip}>183.193.0.18</td>
-              <td className={style.province}>福州</td>
-              <td className={style.time}>2017/09/21</td>
-              <td className={style.type}>扫描器</td>
-            </tr>
-            <tr>
-              <td className={style.id}>4</td>
-              <td className={style.ip}>218.3.99.57</td>
-              <td className={style.province}>广州</td>
-              <td className={style.time}>2017/09/20</td>
-              <td className={style.type}>线下</td>
-            </tr>
-            <tr>
-              <td className={style.id}>5</td>
-              <td className={style.ip}>117.26.97.246</td>
-              <td className={style.province}>福州</td>
-              <td className={style.time}>2017/09/19</td>
-              <td className={style.type}>线下</td>
-            </tr>
-            <tr>
-              <td className={style.id}>6</td>
-              <td className={style.ip}>101.81.228.230</td>
-              <td className={style.province}>杭州</td>
-              <td className={style.time}>2017/09/16</td>
-              <td className={style.type}>扫描器</td>
-            </tr>
-            <tr>
-              <td className={style.id}>7</td>
-              <td className={style.ip}>119.32.151.2</td>
-              <td className={style.province}>南京</td>
-              <td className={style.time}>2017/09/16</td>
-              <td className={style.type}>扫描器</td>
-            </tr>
-            <tr>
-              <td className={style.id}>8</td>
-              <td className={style.ip}>113.90.122.39</td>
-              <td className={style.province}>武汉</td>
-              <td className={style.time}>2017/09/16</td>
-              <td className={style.type}>线下</td>
-            </tr>
-            <tr>
-              <td className={style.id}>9</td>
-              <td className={style.ip}>61.131.13.225</td>
-              <td className={style.province}>重庆</td>
-              <td className={style.time}>2017/09/15</td>
-              <td className={style.type}>扫描器</td>
-            </tr>
-            <tr>
-              <td className={style.id}>10</td>
-              <td className={style.ip}>183.238.141.153</td>
-              <td className={style.province}>广州</td>
-              <td className={style.time}>2017/09/15</td>
-              <td className={style.type}>扫描器</td>
-            </tr>
+            {
+              this.data.map((item, index) => (
+                <tr key={index}>
+                  <td className={style.id}>{index + 1}</td>
+                  <td className={style.ip}>{item.ip}</td>
+                  <td className={style.province}>{util.mappingProvince(item.area)}</td>
+                  <td className={style.time}>{item.date.replace(/-/g, '.')}</td>
+                  <td className={style.type}>{item.type === 'scanner' ? '线上' : '线下'}</td>
+                </tr>
+              ))
+            }
           </tbody>
         </table>
       </div>

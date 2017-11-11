@@ -5,6 +5,9 @@ import style from './Port.scss';
 export default class System extends React.Component {
   constructor(props) {
     super(props);
+    this.port = []
+    this.portData = []
+    this.data = []
     this.option = {
         tooltip : {
             trigger: 'axis'
@@ -18,7 +21,7 @@ export default class System extends React.Component {
         },
         xAxis : {
           type : 'category',
-          data : ['443', '502', '80', '21', '161', '102', '8000'],
+          data : this.port,
           axisLine: {lineStyle: {color: 'white'}},
           axisLabel: {color: 'white'}
         },
@@ -31,14 +34,29 @@ export default class System extends React.Component {
             {
                 name:'设备数',
                 type:'bar',
-                data:[80, 74, 55, 691, 261, 26, 16]
+                data: this.portData
             }
         ]
     };
   }
+  mappingData() {
+    this.port.splice(0)
+    this.portData.splice(0)
+    this.data.forEach((item) => {
+      this.port.push(item.port)
+      this.portData.push(item.num)
+    })
+    this.renderCharts();
+  }
+  componentWillUpdate(newProps) {
+    this.data = newProps.data.result
+    this.mappingData();
+  }
   renderCharts() {
-    const charts = Echarts.init(this.refs.charts);
-    charts.setOption(this.option);
+    if (!this.charts) {
+      this.charts = Echarts.init(this.refs.charts);
+    }
+    this.charts.setOption(this.option);
   }
   render() {
     return (

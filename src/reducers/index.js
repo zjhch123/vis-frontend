@@ -5,6 +5,14 @@ import search from './search';
 import group from './group';
 import map from './map';
 import host from './host';
+import {
+  total, 
+  score, 
+  system, 
+  trend, 
+  province, 
+  port, 
+  s_host } from './situation';
 
 export default combineReducers({
   query,
@@ -12,5 +20,12 @@ export default combineReducers({
   search,
   group,
   map,
-  host
+  host,
+  s_total: total,
+  s_score: score,
+  s_system: system,
+  s_trend: trend,
+  s_province: province,
+  s_port: port,
+  s_host: s_host
 });

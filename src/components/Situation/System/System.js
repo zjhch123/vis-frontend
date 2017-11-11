@@ -5,6 +5,10 @@ import Echarts from 'echarts';
 export default class System extends React.Component {
   constructor(props) {
     super(props);
+    this.data = this.props.data.result
+    this.date = []
+    this.cpu = []
+    this.mem = []
     this.option = {
       tooltip: {
           trigger: 'axis'
@@ -26,7 +30,7 @@ export default class System extends React.Component {
       xAxis: {
           type: 'category',
           boundaryGap: false,
-          data: ['20170919', '20170920', '20170921','20170922','20170923','20170924','20170925','20170926','20170927', '20170928', '20170929', '20170930'],
+          data: this.date,
           axisLabel: {
             color: 'white'
           },
@@ -47,19 +51,36 @@ export default class System extends React.Component {
           {
               name:'内存(%)',
               type:'line',
-              data:[6, 2, 10, 0, 17, 8, 5, 13, 6, 11, 9, 14]
+              data:this.mem
           },
           {
               name:'cpu(%)',
               type:'line',
-              data:[11, 1, 13, 3, 12, 8, 5, 4, 0, 14, 12, 1]
+              data:this.cpu
           }
       ]
     };
   }
+  mappingData() {
+    this.date.splice(0)
+    this.cpu.splice(0)
+    this.mem.splice(0)
+    this.data.sort(function(a,b) {return a.date > b.date}).forEach(item => {
+      this.date.push(item.date.replace(/-/g, ''))
+      this.cpu.push(item.cpu)
+      this.mem.push(item.mem)
+    })
+    this.renderCharts()
+  }
+  componentWillUpdate(newProps) {
+    this.data = newProps.data.result
+    this.mappingData()
+  }
   renderCharts() {
-    const charts = Echarts.init(this.refs.charts);
-    charts.setOption(this.option);
+    if (!this.charts) {
+      this.charts = Echarts.init(this.refs.charts);
+    }
+    this.charts.setOption(this.option);
   }
   render() {
     return (
