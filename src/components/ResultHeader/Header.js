@@ -12,6 +12,7 @@ export default ({className}) => (
         search: window.location.search
       }} className={style.uLinkItem} activeClassName={style.active}>势窗</NavLink>
       <a href={URL.ShiJie} className={style.uLinkItem}>势界</a>
+      <NavLink exact to={URL.SearchRule} className={style.uLinkItem} activeClassName={style.active}>搜索规则</NavLink>
       <Link to={URL.Situation} className={style.uLinkItem}>态势</Link>
       <NavLink exact to={URL.Module} className={style.uLinkItem} activeClassName={style.active}>协议支持</NavLink>
       <Link to={URL.Help} className={style.uLinkItem}>帮助</Link>

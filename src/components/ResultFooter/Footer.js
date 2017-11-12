@@ -17,6 +17,7 @@ export default () => (
       </LinkGroup>
       <LinkGroup className={style.mGroup2} title="更多">
         <NavLink activeClassName={style.active} exact to={URL.OpenAPI}>开放API</NavLink>        
+        <NavLink activeClassName={style.active} exact to={URL.SearchRule}>搜索规则</NavLink>
         <NavLink activeClassName={style.active} exact to={URL.Topic}>专题报告</NavLink>
         <NavLink activeClassName={style.active} exact to={URL.Upload}>提交检测</NavLink>
         <NavLink activeClassName={style.active} exact to={URL.UpgradeLog}>更新记录</NavLink>

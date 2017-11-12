@@ -13,5 +13,6 @@ export default {
   Topic: '/topic',
   Upload: '/upload',
   UpgradeLog: '/upgradelog',
-  Reply: '/reply'
+  Reply: '/reply',
+  SearchRule: '/searchrule'
 }

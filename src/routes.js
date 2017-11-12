@@ -10,6 +10,7 @@ import Search from './containers/Search/Search';
 import Find from './containers/Find/Find';
 import Help from './containers/Help/Help';
 import About from './containers/About/About';
+import SearchRule from './containers/SearchRule/SearchRule';
 import NoMatch from './containers/NoMatch/NoMatch';
 import Module from './containers/Module/Module';
 
@@ -26,6 +27,7 @@ const routes = ({history}) => (
       <Route path="/about" component={About} />
       <Route path="/situation" component={AsyncSituation} />
       <Route path="/module" component={Module} />
+      <Route path="/searchrule" component={SearchRule} />
       <Route component={NoMatch}/>
     </Switch>
   </ConnectedRouter>
