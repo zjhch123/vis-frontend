@@ -130,3 +130,20 @@ export const s_host = (state = {
       return state
   }
 }
+
+export const follow = (state = {
+  result: []
+}, action) => {
+  switch (action.type) {
+    case 'FOLLOW_START': 
+      return {
+        result: []
+      }
+    case 'FOLLOW_SUCCESS': 
+      return {
+        result: action.payload
+      }
+    default:
+      return state
+  }
+}

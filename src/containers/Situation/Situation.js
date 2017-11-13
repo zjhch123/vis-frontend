@@ -13,9 +13,7 @@ import Host from '../../components/Situation/Host/Host';
 import Radar from '../../components/Situation/Radar/Radar';
 import style from './style.scss';
 
-import {Route} from 'react-router';
 import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
 
 import {
   SituationTotalAction,
@@ -24,7 +22,8 @@ import {
   SituationTrendAction,
   SituationProvinceAction,
   SituationPortAction,
-  SituationHostAction
+  SituationHostAction,
+  SituationFollowAction
 } from '../../actions'
 
 class Situation extends React.Component {
@@ -45,6 +44,7 @@ class Situation extends React.Component {
       this.props.dispatchProvince()
       this.props.dispatchPort('all')
       this.props.dispatchHost()
+      this.props.dispatchFollow();
     }, 0);
   }
 
@@ -97,7 +97,7 @@ class Situation extends React.Component {
           <Block className={`${style.mBlock} ${style.mFollow}`}>
             <Block.Title>总体态势跟踪</Block.Title>
             <Block.Container>
-              <Follow ref="follow"/>
+              <Follow ref="follow" data={this.props.follow}/>
             </Block.Container>
           </Block>
           <Block className={`${style.mBlock} ${style.mTrend}`}>
@@ -146,7 +146,8 @@ const mapStateToProps = (state) => ({
   trend: state.s_trend,
   province: state.s_province,
   port: state.s_port,
-  host: state.s_host
+  host: state.s_host,
+  follow: state.s_follow
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -171,6 +172,9 @@ const mapDispatchToProps = (dispatch, props) => ({
   dispatchHost: function() {
     dispatch(SituationHostAction());
   },
+  dispatchFollow: function() {
+    dispatch(SituationFollowAction());
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Situation);

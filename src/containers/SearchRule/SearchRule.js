@@ -4,7 +4,6 @@ import Header from '../../components/ResultHeader/Header';
 import Footer from '../../components/ResultFooter/Footer';
 import SearchBar from '../../components/ResultHeader/SearchBar';
 
-import {Route} from 'react-router';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 

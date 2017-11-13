@@ -69,3 +69,13 @@ export const HostAPI = () => (
       throw new Error('situation API error', res);
     })
 )
+
+export const FollowAPI = () => (
+  fetch(`${SITUATION_ROOT}map/all`)
+    .then(res => {
+      if (res.status === 200) {
+        return res.json();
+      }
+      throw new Error('situation API error', res);
+    })
+)

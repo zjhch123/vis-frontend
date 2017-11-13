@@ -12,7 +12,8 @@ import {
   trend, 
   province, 
   port, 
-  s_host } from './situation';
+  s_host,
+  follow } from './situation';
 
 export default combineReducers({
   query,
@@ -27,5 +28,6 @@ export default combineReducers({
   s_trend: trend,
   s_province: province,
   s_port: port,
-  s_host: s_host
+  s_host: s_host,
+  s_follow: follow
 });

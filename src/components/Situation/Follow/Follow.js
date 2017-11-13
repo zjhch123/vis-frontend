@@ -5,26 +5,23 @@ import Echarts from 'echarts';
 export default class Score extends React.Component {
   constructor(props) {
     super(props);
-    var base = +new Date(2016, 10, 27);
-    var oneDay = 24 * 3600 * 1000;
-    var onlineData = {
+    this.data = props.data.reuslt
+    let base = new Date().getTime()
+    const oneDay = 24 * 60 * 60 * 1000;
+    this.onlineData = {
       date: [],
-      ics: [1340],
-      camera: [20]
+      ics: [],
+      camera: []
     }
-    var offlineData = {
+    this.offlineData = {
       date: [],
-      ics: [100],
-      camera: [8]
+      ics: [],
+      camera: []
     }
-    for (var i = 1; i < 300; i++) {
-        var now = new Date(base += oneDay);
-        onlineData.date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-        onlineData.ics.push(Math.round((Math.random() - 0.5) * 100 + onlineData.ics[i - 1]));
-        onlineData.camera.push(Math.round((Math.random() - 0.45) * 10 + onlineData.camera[i - 1]));
-        offlineData.date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-        offlineData.ics.push(Math.round((Math.random() - 0.5) * 10 + offlineData.ics[i - 1]));
-        offlineData.camera.push(Math.round((Math.random() - 0.45) * 4 + offlineData.camera[i - 1]));
+    for (var i = 0; i < 350; i++) {
+      var now = new Date(base -= oneDay);
+      this.onlineData.date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+      this.offlineData.date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
     }
     this.baseOption = {
         tooltip: {
@@ -43,7 +40,7 @@ export default class Score extends React.Component {
         xAxis: {
             type: 'category',
             boundaryGap: false,
-            data: onlineData.date,
+            data: this.onlineData.date.reverse(),
             axisLine: {lineStyle: {color: 'white'}},
             axisLabel: {color: 'white'}
         },
@@ -76,7 +73,7 @@ export default class Score extends React.Component {
         ],
         series: [
             {
-                name:'工控设备数据量(模拟数据)',
+                name:'工控设备数据量',
                 type:'line',
                 smooth:true,
                 symbol: 'none',
@@ -99,7 +96,7 @@ export default class Score extends React.Component {
                 }
             },
             {
-              name:'摄像头数据量(模拟数据)',
+              name:'摄像头数据量',
               type:'line',
               smooth:true,
               symbol: 'none',
@@ -126,16 +123,45 @@ export default class Score extends React.Component {
     };
     this.optionOnline = JSON.parse(JSON.stringify(this.baseOption));
     this.optionOffline = JSON.parse(JSON.stringify(this.baseOption));
-    this.optionOnline.series[0].data = onlineData.ics;
-    this.optionOnline.series[1].data = onlineData.camera;
-    this.optionOffline.series[0].data = offlineData.ics;
-    this.optionOffline.series[1].data = offlineData.camera;
+    this.optionOnline.series[0].data = this.onlineData.ics;
+    this.optionOnline.series[1].data = this.onlineData.camera;
+    this.optionOffline.series[0].data = this.offlineData.ics;
+    this.optionOffline.series[1].data = this.offlineData.camera;
   }
+
+
+
+  componentWillUpdate(newProp) {
+    this.data = newProp.data.result
+    this.mappingData()
+  }
+
+  mappingData() {
+    this.onlineData.ics.splice(0)
+    this.onlineData.camera.splice(0)
+    this.offlineData.ics.splice(0)
+    this.offlineData.camera.splice(0)
+    console.log(this.data)
+    this.data.forEach(item => {
+      if (item.online === 0) {
+        item.info.forEach(v => this.offlineData[item.type].push(v.num))
+      } else if (item.online === 1) {
+        item.info.forEach(v => this.onlineData[item.type].push(v.num))
+      }
+    })
+    console.log(this.onlineData, this.offlineData)
+    this.renderCharts()
+  }
+
   renderCharts() {
-    const chartsOnline = Echarts.init(this.refs.chartsOnline);
-    chartsOnline.setOption(this.optionOnline);
-    const chartsOffline = Echarts.init(this.refs.chartsOffline);
-    chartsOffline.setOption(this.optionOffline);
+    if (!this.chartsOnline) {
+      this.chartsOnline = Echarts.init(this.refs.chartsOnline);
+    }
+    this.chartsOnline.setOption(this.optionOnline);
+    if (!this.chartsOffline) {
+      this.chartsOffline = Echarts.init(this.refs.chartsOffline);
+    }
+    this.chartsOffline.setOption(this.optionOffline);
   }
   render() {
     return (

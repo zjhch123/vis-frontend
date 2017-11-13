@@ -30,14 +30,31 @@ export default class Total extends React.Component {
   render() {
     return (
       <div className={`${style.cTotal} ${this.props.className || ''}`}>
-        <p>设备总数</p>
-        <p>{this.total}</p>
-        <p>工控设备数</p>
-        <p>{this.online.ics || 0}(扫描平台) {this.offline.ics || 0}(线下核查)</p>
-        <p>摄像头</p>
-        <p>{this.online.camera}(扫描平台) {this.offline.camera}(线下核查)</p>
-        <p>蜜罐</p>
-        <p>{this.online.honeypot}(扫描平台) {this.offline.honeypot}(线下核查)</p>
+        <div className={style["mTable"]}>
+          <div className={style["u-row"]}>
+            <span className={style["uLabel"]}></span>
+            <span className={style["uLabel"]}>扫描平台</span>
+            <span className={style["uLabel"]}>线下核查</span>
+          </div>
+          <div className={style["u-row"]}>
+            <span className={style["uLabel"]}>工控设备数</span>
+            <span className={style["uLabel"]}>{this.online.ics || 0}</span>
+            <span className={style["uLabel"]}>{this.offline.ics || 0}</span>
+          </div>
+          <div className={style["u-row"]}>
+            <span className={style["uLabel"]}>摄像头</span>
+            <span className={style["uLabel"]}>{this.online.camera || 0}</span>
+            <span className={style["uLabel"]}>{this.offline.camera || 0}</span>
+          </div>
+          <div className={style["u-row"]}>
+            <span className={style["uLabel"]}>蜜罐</span>
+            <span className={style["uLabel"]}>{this.online.honeypot || 0}</span>
+            <span className={style["uLabel"]}>{this.offline.honeypot || 0}</span>
+          </div>
+        </div>
+        <div className={style["uTotal"]}>
+          <p>设备总数 {this.total}</p>
+        </div>
       </div>
     )
   }

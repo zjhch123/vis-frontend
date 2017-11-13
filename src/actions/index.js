@@ -1,5 +1,5 @@
 import {SearchAPI, GroupAPI, MapAPI, HostAPI} from '../api';
-import {TotalAPI, ScoreAPI, SystemAPI, TrendAPI, ProvinceAPI, PortAPI, HostAPI as SituationHostAPI} from '../api/situation';
+import {TotalAPI, ScoreAPI, SystemAPI, TrendAPI, ProvinceAPI, PortAPI, HostAPI as SituationHostAPI, FollowAPI} from '../api/situation';
 
 const SearchStart = (condition) => ({
   type: 'SEARCH_START',
@@ -157,6 +157,19 @@ const SituationHostError = () => ({
   type: 'SHOST_ERROR'
 })
 
+const SituationFollowStart = () => ({
+  type: 'FOLLOW_START'
+})
+
+const SituationFollowSuccess = (result) => ({
+  type: 'FOLLOW_SUCCESS',
+  payload: result
+})
+
+const SituationFollowError = () => ({
+  type: 'FOLLOW_ERROR'
+})
+
 
 
 
@@ -242,4 +255,11 @@ export const SituationHostAction = () => (dispatch) => {
   SituationHostAPI()
       .then(json => dispatch(SituationHostSuccess(json)))
       .catch( error => dispatch(SituationHostError()));
+}
+
+export const SituationFollowAction = () => (dispatch) => {
+  dispatch(SituationFollowStart());
+  FollowAPI()
+      .then(json => dispatch(SituationFollowSuccess(json)))
+      .catch( error => dispatch(SituationFollowError()));
 }
