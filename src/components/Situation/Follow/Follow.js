@@ -141,7 +141,6 @@ export default class Score extends React.Component {
     this.onlineData.camera.splice(0)
     this.offlineData.ics.splice(0)
     this.offlineData.camera.splice(0)
-    console.log(this.data)
     this.data.forEach(item => {
       if (item.online === 0) {
         item.info.forEach(v => this.offlineData[item.type].push(v.num))
@@ -149,7 +148,6 @@ export default class Score extends React.Component {
         item.info.forEach(v => this.onlineData[item.type].push(v.num))
       }
     })
-    console.log(this.onlineData, this.offlineData)
     this.renderCharts()
   }
 
