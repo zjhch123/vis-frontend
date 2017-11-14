@@ -3,9 +3,20 @@
   height: 100%;
   color: white;
   position: relative;
+  text-align: center;
+  &:before {
+    content: '';
+    display: inline-block;
+    width: 1px;
+    height: 100%;
+    vertical-align: middle;
+  }
+}
+.m-container {
+  display: inline-block;
+  vertical-align: middle;
 }
 .m-table {
-  margin-top: 30px;
   padding: 0 18px;
   box-sizing: border-box;
   .u-row {
@@ -31,6 +42,7 @@
   }
 }
 .u-total {
+  text-align: left;
   padding-left: 18px;
   font-size: 14px;
   font-weight: bold;
