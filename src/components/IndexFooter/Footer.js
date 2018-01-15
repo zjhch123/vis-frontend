@@ -3,7 +3,7 @@ import './Footer.scss';
 
 export default ({className}) => (
   <footer className={className || ''}>
-    <p>Copyright © 2016 - 2017 Team of Trace Seeker. All Rights Reserved</p>
+    <p>浙江大学网络空间主动防御科技联盟</p>
   </footer>
 );
 

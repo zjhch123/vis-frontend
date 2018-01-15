@@ -235,12 +235,19 @@ export default class Situation extends React.Component {
       if (cw > 1090 && ch > 600) {
         document.body.style.overflow = 'hidden'
       }
+      this.intervalId = setInterval(() => {
+        if (!!document.querySelector('.anchorBL')) {
+          document.querySelector('.anchorBL').style.display = "none";
+        }
+      }, 100);
     }
 
     componentWillUnmount() {
       this.bmap.removeEventListener('zoomend', this._bmapReRender.bind(this))
       document.body.style.overflow = 'auto'
+      clearInterval(this.intervalId);
     }
+
 
     _bmapReRender() {
       this.option.bmap.zoom = this.bmap.getZoom()

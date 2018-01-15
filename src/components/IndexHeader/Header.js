@@ -8,7 +8,9 @@ export default class Header extends React.Component {
     return (
       <header className={`${style.cHeader} ${this.props.className || ''} f-cb`}>
         <div className={style.gLeft}>
-          <Link to={URL.Index} className={`${style.mLogo} ${style.uLinkItem}`}>鉴势</Link>
+          <Link to={URL.Index} className={`${style.mLogo} ${style.uLinkItem}`}>
+            <img src={require('../../resource/image/header_logo.png')} className={style.uHeaderLogo}/>
+          </Link>
         </div>
         <div className={style.gRight}>
           <Link to={URL.Index} className={style.uLinkItem}>首页</Link>
@@ -17,8 +19,8 @@ export default class Header extends React.Component {
           <NavLink exact to={URL.SearchRule} className={style.uLinkItem} activeClassName={style.active}>搜索规则</NavLink>
           <NavLink exact to={URL.Situation} className={style.uLinkItem} activeClassName={style.active}>态势</NavLink>
           <NavLink exact to={URL.Module} className={style.uLinkItem} activeClassName={style.active}>协议支持</NavLink>
-          <NavLink exact to={URL.Help} className={style.uLinkItem} activeClassName={style.active}>帮助</NavLink>
-          <NavLink exact to={URL.About} className={style.uLinkItem} activeClassName={style.active}>关于我们</NavLink>
+          { /*<NavLink exact to={URL.Help} className={style.uLinkItem} activeClassName={style.active}>帮助</NavLink>*/ }
+          { /*<NavLink exact to={URL.About} className={style.uLinkItem} activeClassName={style.active}>关于我们</NavLink>*/ }
         </div>
       </header>
     )

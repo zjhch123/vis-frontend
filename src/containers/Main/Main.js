@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../components/IndexHeader/Header';
-import SVGLogo from '../../components/Logo/SVGLogo';
+import IMGLogo from '../../components/Logo/IMGLogo';
 import Button from '../../components/Button/Button';
 import Footer from '../../components/IndexFooter/Footer';
 import { Link } from 'react-router-dom';
@@ -51,17 +51,17 @@ class Main extends React.Component {
         <Header />
         <main className={style.gMain}>
           <div className={style.mMain}>
-            <SVGLogo className={style.uLogo} src={require('../../resource/image/logo.svg')} width="170px" height="170px" />
-            <h1 className={style.uTitle}>工控设备在线搜索与可视化平台</h1>
+            <IMGLogo className={style.uLogo} src={require('../../resource/image/main_logo.png')} width="110px" height="110px" />
+            <h1 className={style.uTitle}>工业安全态势感知平台系统</h1>
             <div className={style.mInput}>
               <input type="text" className={style.uInput} ref="searchInput" placeholder={this.scrollInput[0]} onChange={(e) => this.handlerChange(e)} onKeyDown={(e) => this.handlerKeyDown(e)}/>
             </div>
             <div className={style.mBtnGroup}>
-              <Button title="鉴势一下" className={style.uBtn} type="blue" onClick={() => this.props.StartSearch(this.queryCondition)}/>
+              <Button title="搜索一下" className={style.uBtn} type="blue" onClick={() => this.props.StartSearch(this.queryCondition)}/>
               <Link to={URL.HighSearch} className={`${style.uBtn} ${style.uSearch}`}>高级搜索</Link>
             </div>
             <div className={style.mTip}>
-              <p className={style.uTip}>提示:按下Shift+/显示帮助</p>
+              { /*<p className={style.uTip}>提示:按下Shift+/显示帮助</p>*/}
             </div>
           </div>
         </main>

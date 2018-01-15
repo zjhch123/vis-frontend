@@ -32,13 +32,13 @@ class Situation extends React.Component {
     window.scrollTo(0, 0);
     setTimeout(() => {
       this.refs['bmap'].renderCharts();
-      this.refs['score'].renderCharts();
+      // this.refs['score'].renderCharts();
       this.refs['system'].renderCharts();
       this.refs['follow'].renderCharts();
       this.refs['trend'].renderCharts();
       this.refs['port'].renderCharts();
       this.props.dispatchTotal('all')
-      this.props.dispatchScore('all')
+      // this.props.dispatchScore('all')
       this.props.dispatchSystem()
       this.props.dispatchTrend()
       this.props.dispatchProvince()
@@ -74,12 +74,12 @@ class Situation extends React.Component {
               <Total data={this.props.total}/>
             </Block.Container>
           </Block>
-          <Block className={style.mBlock}>
+          {/*<Block className={style.mBlock}>
             <Block.Title>实时安全评分</Block.Title>
             <Block.Container>
               <Score ref="score" data={this.props.score}/>
             </Block.Container>
-          </Block>
+          </Block>*/}
           <Block className={style.mBlock}>
             <Block.Title>系统运行情况</Block.Title>
             <Block.Container>

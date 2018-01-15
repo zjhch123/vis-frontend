@@ -15,12 +15,12 @@ export default ({className}) => (
       <NavLink exact to={URL.SearchRule} className={style.uLinkItem} activeClassName={style.active}>搜索规则</NavLink>
       <Link to={URL.Situation} className={style.uLinkItem}>态势</Link>
       <NavLink exact to={URL.Module} className={style.uLinkItem} activeClassName={style.active}>协议支持</NavLink>
-      <Link to={URL.Help} className={style.uLinkItem}>帮助</Link>
-      <Link to={URL.About} className={style.uLinkItem}>关于我们</Link>
+      { /*<Link to={URL.Help} className={style.uLinkItem}>帮助</Link>*/ }
+      { /*<Link to={URL.About} className={style.uLinkItem}>关于我们</Link>*/ }
     </div>
-    <div className={style.gRight}>
+    {/*<div className={style.gRight}>
       <Link to={URL.Register} className={style.uLinkItem}>注册</Link>
       <Link to={URL.Login} className={style.uLinkItem}>登录</Link>
-    </div>
+    </div>*/}
   </header>
 )

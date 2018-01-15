@@ -2,6 +2,7 @@ import React from 'react';
 import style from './SearchBar.scss';
 import Split from '../Split/Split';
 import Brand from '../Brand/Brand';
+import Util from '../../util';
 import {NavLink} from 'react-router-dom';
 
 export default ({title, detail, inputValueChange, submitClick, location}) => (
@@ -16,10 +17,10 @@ export default ({title, detail, inputValueChange, submitClick, location}) => (
               onKeyDown={(e) => e.keyCode === 13 && submitClick()}/>
         <a className={style.mBtn} 
             onClick={() => submitClick()}>
-            立即鉴势
+            立即搜索
         </a>
       </div>
-      <span className={style.uTip}>数据最新获取时间：2017年07月06日</span>
+      <span className={style.uTip}>数据最新获取时间：{ Util.getNowMonthDate() }</span>
     </div>
     { 
       detail &&

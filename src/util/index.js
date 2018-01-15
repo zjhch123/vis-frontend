@@ -25,6 +25,10 @@ var Util = {
   },
   mappingProvince: function(namePY) {
     return PROVINCEMAPPING[namePY] || '未知'
+  },
+  getNowMonthDate: () => {
+    const now = new Date()
+    return now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + 1 + '日'
   }
 }
 
